@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- use below to auto-refresh changes in the browser -->
+    <script type="text/javascript" src="https://livejs.com/live.js"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>The Social Media Information Gap</title>
+    <meta name="description" content="Social Media Information Gap" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+        #scrolly {
+            position: relative;
+            background-color: #f3f3f3;
+            padding: .1rem;
+        }
+
+        article {
+            position: relative;
+            padding: 0;
+            max-width: 20rem;
+            margin: 0 auto;
+        }
+
+        .sticky-thing {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            background-color: #f3f3f3;
+            z-index: 0;
+            top: .1vh;
+            height: 100vh;
+            /* Center everything inside */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* background-image: url('images/multi.jpg'); */
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .sticky-thing p {
+            font-size: 8rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .step {
+            margin: 0 auto 30rem auto;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step.is-active p {
+            background-color: #daa520;
+            color: #3b3b3b;
+        }
+
+        .step p {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.5rem;
+            background-color: #3b3b3b5e;
+        }
+
+        .visualization {
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <!-- <nav>
+           <a href="https://github.com/russellgoldenberg/scrollama">scrollama.js</a>
+           <div class="nav__examples">
+           <p>Examples:</p>
+           <a href="basic.html">Basic</a>
+           <a href="progress.html">Progress</a>
+           <a href="sticky-side.html">Sticky Side</a>
+           <a href="sticky-overlay.html">Sticky Overlay</a>
+           </div>
+	   </nav> -->
+
+        <section id="scrolly">
+            <div class="sticky-thing">
+                <p></p>
+            </div>
+
+            <article>
+                <div class="step" data-step="" data-image=url('images/multi.jpg')>
+                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada?</p>
+                </div>
+                <div class="step" data-step="" data-image=url('images/toronto.jpg')>
+                    <p>Our research suggests that some new immigrants use social media to find job information before arriving, while others do not.</p>
+                </div>
+                <div class="step" data-step="">
+                    <p>Job outcomes between the two suggest that the disparity between these two groups is important...</p>
+                </div>
+            </article>
+        </section>
+
+        <section id="intro">
+            <h1 class="intro__hed">The Social Media Information Gap</h1>
+            <p class="intro__dek">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </section>
+
+        <section id="prearrival">
+            <h2 class="section__hed">Pre-Arrival</h2>
+            <p class="prearrival__dek">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <!-- Create a div where the graph will take place -->
+            <div class="visualization" id="my_dataviz"></div>
+        </section>
+
+        <section id="scrolly">
+            <div class="sticky-thing">
+                <p></p>
+            </div>
+
+            <article>
+                <div class="step" data-step="" data-color="red">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="step" data-step="" data-color="blue">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </article>
+        </section>
+
+        <section id="outro"></section>
+    </main>
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="./js/line.js"></script>
+    <!-- <div class='debug'></div> -->
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <script>
+        // move all of this into its own separate js
+        var main = document.querySelector("main");
+        var scrolly = main.querySelector("#scrolly");
+        var sticky = scrolly.querySelector(".sticky-thing");
+        var article = scrolly.querySelector("article");
+        var steps = article.querySelectorAll(".step");
+
+        // initialize the scrollama
+        var scroller = scrollama();
+
+        // scrollama event handlers
+        function handleStepEnter(response) {
+            // response = { element, direction, index }
+            var el = response.element;
+            // remove below
+            console.log(el);
+
+            // remove is-active from all steps
+            // then add is-active to this step
+            steps.forEach(step => step.classList.remove('is-active'));
+            el.classList.add('is-active');
+
+            // update graphic based on step
+            // figure out how to do transition base (see vue-scrollama)
+            sticky.querySelector("p").innerText = el.dataset.step;
+            sticky.style.backgroundImage = el.dataset.image;
+            /* sticky.style.backgroundColor = el.dataset.color; */
+        }
+
+        function init() {
+            // 2. setup the scroller passing options
+            // 		this will also initialize trigger observations
+            // 3. bind scrollama event handlers (this can be chained like below)
+            // change below if there are multiple types of scrolling experiences on the page
+            scroller
+                .setup({
+                    step: "#scrolly article .step",
+                    offset: 0.33,
+                    // turn debug back on to see where transitions are
+                    debug: false
+                })
+                .onStepEnter(handleStepEnter);
+
+            // setup resize event
+            window.addEventListener("resize", scroller.resize);
+        }
+
+        // kick things off
+        init();
+    </script>
+</body>
+
+</html>
