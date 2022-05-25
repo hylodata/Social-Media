@@ -92,20 +92,25 @@
            </div>
 	   </nav> -->
 
+     
         <section id="scrolly">
-            <div class="sticky-thing">
-                <p></p>
+          <div class="sticky-thing">
+            <p></p>
             </div>
 
             <article>
+              <div class="step" data-step="" data-image=url('images/multi.jpg')>
+                </div>
                 <div class="step" data-step="" data-image=url('images/multi.jpg')>
-                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada?</p>
+                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada before their arrival?</p>
                 </div>
                 <div class="step" data-step="" data-image=url('images/toronto.jpg')>
-                    <p>Our research suggests that some new immigrants use social media to find job information before arriving, while others do not.</p>
+                    <p>We surveyed nearly a thousand new immigrants about their social media use prior to arrival in Canada, and then tracked their employment progress over the following year.</p>
                 </div>
-                <div class="step" data-step="">
-                    <p>Job outcomes between the two suggest that the disparity between these two groups is important...</p>
+                <div class="step" data-step="" data-image=url('images/immigrants.jpg')>
+                    <p>Most new immigrants use social media to find employment information before arriving, but some do not. Job outcomes between these two groups suggest that something something something key point...</p>
+                </div>
+                <div class="step" data-step="" data-image=url('images/immigrants.jpg')>
                 </div>
             </article>
         </section>
@@ -126,7 +131,12 @@
             <div class="visualization" id="my_dataviz"></div>
         </section>
 
-        <section id="scrolly">
+        <!-- <p>65% (n=263) of surveyed pre-arrival newcomers are social media users.</p>
+
+             <div class="visualization" id="my_dataviz"></div>
+             <p>82% (n=288) of surveyed pre-arrival newcomers connected with a person or grouop regarding immigration before coming to Canada.</p> -->
+
+	<section id="scrolly">
             <div class="sticky-thing">
                 <p></p>
             </div>
@@ -146,7 +156,8 @@
 
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="./js/sm_use.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="./js/stacked.js"></script>
     <!-- <div class='debug'></div> -->
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
     <script src="https://unpkg.com/scrollama"></script>
@@ -188,7 +199,7 @@
             scroller
                 .setup({
                     step: "#scrolly article .step",
-                    offset: 0.33,
+                    offset: 0.70,
                     // turn debug back on to see where transitions are
                     debug: false
                 })
