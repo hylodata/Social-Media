@@ -45,7 +45,7 @@ d3.csv("./../data/data_stackedXL.csv", function(data) {
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(d3.schemeSet2);
+    .range(d3.schemeTableau10);
 
   //stack the data? --> stack per subgroup
   var stackedData = d3.stack()

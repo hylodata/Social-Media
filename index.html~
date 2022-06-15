@@ -21,7 +21,7 @@
         article {
             position: relative;
             padding: 0;
-            max-width: 25rem;
+            max-width: 20rem;
             margin: 0 auto;
         }
 
@@ -51,7 +51,7 @@
         }
 
         .step {
-            margin: 0 auto 35rem auto;
+            margin: 0 auto 30rem auto;
             color: #fff;
             background-color: rgba(0, 0, 0, 0.4);
         }
@@ -61,28 +61,20 @@
         }
 
         .step.is-active p {
-            background-color: rgba(0, 76, 155, 0.7);
-            color: #3b3b3b5;
+            background-color: #daa520;
+            color: #3b3b3b;
         }
 
         .step p {
             text-align: center;
             padding: 2rem;
             font-size: 1.5rem;
-            background-color: rgba(0, 76, 155, 0.7);
+            background-color: #3b3b3b5e;
         }
 
         .visualization {
             padding: 2rem;
         }
-
-        .button {
-            background-color: rgba(0, 76, 155, 0.7);;
-            color: black;
-            text-align: center;
-            font-size: 15px;
-            padding: 7px;
-         }
     </style>
 </head>
 
@@ -110,13 +102,13 @@
                 <div class="step" data-step="" data-image=url('images/multi.jpg')>
                 </div>
                 <div class="step" data-step="" data-image=url('images/multi.jpg')>
-                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada before their arrival? Are most new immigrants using it? Is it effective?</p>
+                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada before their arrival?</p>
                 </div>
                 <div class="step" data-step="" data-image=url('images/toronto.jpg')>
-                    <p>We surveyed 500 recent immigrants to Canada, asking how social media helped them learn about work prospects in Canada prior to their arrival. We then tracked their employment progress over the following year.</p>
+                    <p>We surveyed nearly a thousand new immigrants about their social media use prior to arrival in Canada, and then tracked their employment progress over the following year.</p>
                 </div>
                 <div class="step" data-step="" data-image=url('images/immigrants.jpg')>
-                    <p>While a large number of recent immigrants used social media to find employment information before arriving, many Settlement Service Provider Organizations are new to social media-driven communication strategies. Where can they build capacity to best support recent immigrants?</p>
+                    <p>Most new immigrants use social media to find employment information before arriving, but some do not. Job outcomes between these two groups suggest that something something something key point...</p>
                 </div>
                 <div class="step" data-step="" data-image=url('images/immigrants.jpg')>
                 </div>
@@ -133,62 +125,28 @@
         <section id="prearrival">
             <h2 class="section__hed">Pre-Arrival Search and Communication</h2>
             <p class="prearrival__dek">
-              A high percentage of incoming immigrants search for information about work prospects before coming to Canada. As many as 65% (n=263) of surveyed pre-arrival newcomers are social media users. 82% (n=288) of surveyed pre-arrival newcomers connected with a person or group regarding immigration before coming to Canada. Facebook, for example, is almost as important as making a direct email or phone call, and more frequently used than instant messaging services. Other important social media information resources include LinkedIn, QZone, and online discussion forums.
-              <div class="visualization" id="Graph2"></div>
-	    </p>
-            <p class="prearrival__dek">
-              If we examine this data along gendered lines, an important difference appears. Men prefer email or telephone-based communication.
-	      <div id="Graph2m"></div>
-	    </p>
-
-	    <p class="prearrival__dek">
-	      While, Facebook is more popular than making direct phone calls or emails for women.
-	      <div id="Graph2f"></div>      
+                65% (n=263) of surveyed pre-arrival newcomers are social media users. 82% (n=288) of surveyed pre-arrival newcomers connected with a person or group regarding immigration before coming to Canada. These are the communication methods and social media platforms they used to connect with peers and service organizations prior to their arrival in Canada.
             </p>
+            <!-- Create a div where the graph will take place -->
+            <div class="visualization" id="my_dataviz"></div>
         </section>
 
         <section id="intermediate">
-            <h2 class="section__hed">Mixing Resources</h2>
+            <h2 class="section__hed">Experiences with SM Platforms</h2>
             <p class="prearrival__dek">
-	      While new immigrants are combing the social media environment for information and services, they primarily rely on a few key methods and platforms to find information about the Canadian labour market. Use the interactive features below to see which resources immigrants use to gain access to different services and types of information.</p>
-
-	    <p class="prearrival__dek">
-              <!-- Create a div where the graph will take place -->
-                <!-- <div class="visualization" id="sm_use"></div> -->
-
-                <!-- Add buttons for graph6 -->
-                <button onclick="update('Occupational Licencing requirements')">Occupational Licencing Requirements</button>
-                <button onclick="update('Further Education or skill training information')">Further Education or Skill Training</button>
-                <button onclick="update('Job Search tips and advice ')">Job Search Advice </button>
-                <button onclick="update('Interview tips and advice')">Job Interview Advice</button>
-                <button onclick="update('English or French training information')">English or French Training</button>
-                <button onclick="update('Salary information')">Salary Information</button>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
-	      
-            <div id="Graph6"></div>
-
-            <p class="prearrival__dek">
-	      When surveying new immigrants, we also asked what their experience was like.  Did they find what they were looking for? What other experiences did they have when trying to access labour market information? A significant number of respondents experienced misinformation, and a smaller number experienced issues like fraud, identity theft, and even discrimination. A sizable portion didn't have confidence in the information they were finding on social media.
-	      
-              <div id="Graph3"></div>
-
-	      </p>
+            <!-- Create a div where the graph will take place -->
+            <!-- <div class="visualization" id="sm_use"></div> -->
         </section>
 
         <section id="postarrival">
             <h2 class="section__hed">Post-Arrival Labour Outcomes</h2>
             <p class="prearrival__dek">
-              How did the use of social media affect newcomers' ability to establish themselves in the Canadian labour market? These graphs depict differences in labour market outcomes between those who used social media before arrival to search for labour market information and those who did not. Hover over the sections for more information.
-
-	      <!-- In the first six months of arrival, those who used social media had big advantage in getting established in the labour market  (3 to 1 advantage) -->
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
             <!-- Create a div where the graph will take place -->
             <!-- <div class="visualization" id="my_dataviz"></div> -->
-
-            <div id="Graph4_Employment"></div>
-            <div id="Graph4_Earnings"></div>
-            <div id="Graph4_JobMatch"></div>
-            <!-- <div id="Graph4_Precarity"></div> -->
         </section>
 
         <!-- <section id="scrolly">
@@ -215,11 +173,9 @@
     </main>
 
     <!-- Load d3.js -->
-    <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
-    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <!-- <script src="./js/stacked.js"></script> -->
-    <script src="js/index.js"></script>
+    <script src="./js/stacked.js"></script>
     <!-- <script src="./js/sm_use.js"></script> -->
     <!-- <div class='debug'></div> -->
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>

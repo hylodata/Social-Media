@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 30, bottom: 40, left: 90},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+var margin = {top: 20, right: 30, bottom: 40, left: 300},
+    width = 1200 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -34,6 +34,10 @@ d3.csv("./../data/sm_use.csv", function(data) {
   svg.append("g")
     .call(d3.axisLeft(y))
 
+    // color palette = one color per subgroup
+    var color = d3.scaleOrdinal()
+      .range(d3.schemeTableau10);
+
   //Bars
   svg.selectAll("myRect")
     .data(data)
@@ -43,8 +47,7 @@ d3.csv("./../data/sm_use.csv", function(data) {
     .attr("y", function(d) { return y(d.Method); })
     .attr("width", function(d) { return x(d.Value); })
     .attr("height", y.bandwidth() )
-    .attr("fill", "#69b3a2")
-
+    .attr("fill", "#0099ff")
 
     // .attr("x", function(d) { return x(d.Method); })
     // .attr("y", function(d) { return y(d.Value); })

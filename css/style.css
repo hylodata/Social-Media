@@ -31,13 +31,13 @@ h1 {
     font-weight: 200;
     font-size: 55px;
     margin-bottom: 0;
-    color: #0099ff;
+    color: #0077c8;
 }
 
 h2 {
     font-weight: 200;
     font-size: 38px;
-    color: #0099ff;
+    color: #0077c8;
 }
 
 a,
@@ -46,6 +46,19 @@ a:hover {
     color: teal;
     text-decoration: none;
     border-bottom: 2px solid currentColor;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+svg {
+    display: block;
+    margin: 0 auto;
 }
 
 nav {
@@ -84,31 +97,48 @@ nav {
 #intro {
     max-width: 40rem;
     margin: 1rem auto;
-    text-align: center;
+    text-align: left;
     margin-bottom: 60px;
 }
 
 .intro__hed {
-    margin: 2rem auto 2rem auto;
+    max-width: 40rem;
+    margin: 1rem auto;
+    text-align: left;
 }
 
 .intro__dek {
+    max-width: 40rem;
+    margin: 1rem auto;
+    text-align: left;
     color: #8a8a8a;
 }
 
 .section__hed {
-    margin-left: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    max-width: 40rem;
+    margin: 1rem auto;
+    text-align: left;
 }
 
 #prearrival {
-    background-color:#e6f5ff;
+    background-color:#cce5ff;
+    padding: 10px;
+}
+
+#intermediate {
+    background-color:#fff8cc;
+    padding: 10px;
+}
+
+#postarrival {
+    background-color:#cce5ff;
     padding: 10px;
 }
 
 .prearrival__dek {
-    margin-left: 40px;
+    max-width: 40rem;
+    margin: 1rem auto;
+    text-align: left;
 }
 
 .github-corner:hover .octo-arm {
@@ -151,5 +181,8 @@ nav {
 }
 
 #outro {
-    height: 640px;
+        max-width: 40rem;
+    margin: 1rem auto;
+    text-align: center;
+    margin-bottom: 60px;
 }
