@@ -361,62 +361,61 @@ d3.csv("./data/Experience-Graph3.csv").then(function(data) {
 // GRAPH 3 - TreeMap
 // ----------------
 
-
-
-// set the dimensions and margins of the graph
-const margin_treemap = {top: 10, right: 10, bottom: 10, left: 10},
-  width_treemap = 900 - margin_treemap.left - margin_treemap.right,
-  height_treemap = 900 - margin_treemap.top - margin_treemap.bottom;
-
-// append the svg object to the body of the page
-const svg_treemap = d3.select("#Graph3_Treemap")
-.append("svg")
-  .attr("width", width_treemap + margin_treemap.left + margin_treemap.right)
-  .attr("height", height_treemap + margin_treemap.top + margin_treemap.bottom)
-.append("g")
-  .attr("transform",
-        `translate(${margin_treemap.left}, ${margin_treemap.top})`);
-
-// Read data
-d3.csv('./data/Experience-Graph3.csv').then(function(data) {
-
-  // stratify the data: reformatting for d3.js
-  const root = d3.stratify()
-    .id(function(d) { return d.Group; })   // Name of the entity (column name is name in csv)
-    .parentId(function(d) { return d.Parent; })   // Name of the parent (column name is parent in csv)
-    (data);
-  root.sum(function(d) { return +d.value })   // Compute the numeric value for each entity
-
-  // Then d3.treemap computes the position of each element of the hierarchy
-  // The coordinates are added to the root object above
-  d3.treemap()
-    .size([width_treemap, height_treemap])
-    .padding(4)
-    (root)
-
-  // use this information to add rectangles:
-  svg_treemap
-    .selectAll("rect")
-    .data(root.leaves())
-    .join("rect")
-      .attr('x', function (d) { return d.x0; })
-      .attr('y', function (d) { return d.y0; })
-      .attr('width', function (d) { return d.x1 - d.x0; })
-      .attr('height', function (d) { return d.y1 - d.y0; })
-      .style("stroke", "black")
-      .style("fill", "#69b3a2");
-
-  // and to add the text labels
-  svg_treemap
-    .selectAll("text")
-    .data(root.leaves())
-    .join("text")
-      .attr("x", function(d){ return d.x0+10})    // +10 to adjust position (more right)
-      .attr("y", function(d){ return d.y0+20})    // +20 to adjust position (lower)
-      .text(function(d){ return d.data.Group})
-      .attr("font-size", "15px")
-      .attr("fill", "white")
-})
+    // set the dimensions and margins of the graph
+    const margin_G3treemap = {top: 10, right: 10, bottom: 10, left: 10},
+    width_G3treemap = 445 - margin_G3treemap.left - margin_G3treemap.right,
+    height_G3treemap = 445 - margin_G3treemap.top - margin_G3treemap.bottom;
+  
+  // append the svg object to the body of the page
+  const svg_G3treemap = d3.select("#Graph3_Treemap")
+  .append("svg")
+    .attr("width", width_G3treemap + margin_G3treemap.left + margin_G3treemap.right)
+    .attr("height", height_G3treemap + margin_G3treemap.top + margin_G3treemap.bottom)
+  .append("g")
+    .attr("transform",
+          `translate(${margin_G3treemap.left}, ${margin_G3treemap.top})`);
+  
+  // Read data
+  d3.csv('./data/Experience-Graph3-TreeMap.csv').then(function(data) {
+  
+    // stratify the data: reformatting for d3.js
+    const root = d3.stratify()
+      .id(function(d) { return d.Experience; })   // Name of the entity (column name is name in csv)
+      .parentId(function(d) { return d.parent; })   // Name of the parent (column name is parent in csv)
+      (data);
+    root.sum(function(d) { return +d.value })   // Compute the numeric value for each entity
+  
+    // Then d3.treemap computes the position of each element of the hierarchy
+    // The coordinates are added to the root object above
+    d3.treemap()
+      .size([width_G3treemap, height_G3treemap])
+      .padding(4)
+      (root)
+  
+    // use this information to add rectangles:
+    svg_G3treemap
+      .selectAll("rect")
+      .data(root.leaves())
+      .join("rect")
+        .attr('x', function (d) { return d.x0; })
+        .attr('y', function (d) { return d.y0; })
+        .attr('width', function (d) { return d.x1 - d.x0; })
+        .attr('height', function (d) { return d.y1 - d.y0; })
+        .style("stroke", "black")
+        .style("fill", "#69b3a2");
+  
+    // and to add the text labels
+    svg_G3treemap
+      .selectAll("text")
+      .data(root.leaves())
+      .join("text")
+        .attr("x", function(d){ return d.x0+10})    // +10 to adjust position (more right)
+        .attr("y", function(d){ return d.y0+20})    // +20 to adjust position (lower)
+        .text(function(d){ return d.data.Experience})
+        .attr("font-size", "15px")
+        .attr("fill", "white")
+  })
+  
 
 
 // ----------------
