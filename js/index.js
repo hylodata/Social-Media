@@ -420,64 +420,66 @@ d3.csv('./data/Experience-Graph3.csv').then(function(data) {
 
 
 // ----------------
-// GRAPH 4 - Employment
+// GRAPH 4 - Employment  
 // ----------------
 
-// set the dimensions and margins of graph 1
+// set the dimensions and margins of graph 2
 const margin_G4Employment = {
     top: 10,
     right: 30,
-    bottom: 200,
+    bottom: 300,
     left: 100
-},
-width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
-height_G4Employment = 500 - margin_G4Employment.top - margin_G4Employment.bottom;
-
-// append the svg object to the body of the page
-const svgG4Employment = d3.select("#Graph4_Employment")
-.append("svg")
-.attr("width", width_G4Employment + margin_G4Employment.left + margin_G4Employment.right)
-.attr("height", height_G4Employment + margin_G4Employment.top + margin_G4Employment.bottom)
-.append("g")
-.attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
-
-// Parse the Data
-d3.csv("./data/Employment-Graph4-TreeMap.csv").then(function(data) {
-// List of subgroups = header of the csv files
-const subgroups_employment = data.columns.slice(1)
-// List of groups = species here = value of the first column called group -> show them on the X axis
-const groups_employment = data.map(d => d.G)
-
-// Add X axis
-const x = d3.scaleBand()
-    .domain(groups_employment)
+  },
+  width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
+  height_G4Employment = 600 - margin_G4Employment.top - margin_G4Employment.bottom;
+  
+  // append the svg object to the body of the page
+  const svg_G4Employment = d3.select("#Graph4_Employment")
+  .append("svg")
+  .attr("width", width_G4Employment + margin_G4Employment.left + margin_G4Employment.right)
+  .attr("height", height_G4Employment + margin_G4Employment.top + margin_G4Employment.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
+  
+  // Parse the Data
+  d3.csv("../data/Employment-Graph4.csv").then(function(data) {
+  
+  // List of subgroups = header of the csv files = soil condition here
+  const subgroups_Employment = data.columns.slice(1)
+  
+  // List of groups = species here = value of the first column called group -> I show them on the X axis
+  const groups_Employment = data.map(d => d.G)
+  
+  // Add X axis
+  const x = d3.scaleBand()
+    .domain(groups_Employment)
     .range([0, width_G4Employment])
     .padding([0.2])
-svgG4Employment.append("g")
+  svg_G4Employment.append("g")
     .attr("transform", `translate(0, ${height_G4Employment})`)
     .call(d3.axisBottom(x).tickSizeOuter(0))
-    .selectAll("text")
+        .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")
     .style("text-anchor", "end");
-
-// Add Y axis
-const y = d3.scaleLinear()
+  
+  // Add Y axis
+  const y = d3.scaleLinear()
     .domain([0, 100])
     .range([height_G4Employment, 0]);
-svgG4Employment.append("g")
+  svg_G4Employment.append("g")
     .call(d3.axisLeft(y));
-
-// color palette = one color per subgroup
-const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
-
-//stack the data? --> stack per subgroup
-const stackedData = d3.stack()
-    .keys(subgroups_employment)
+  
+  // color palette = one color per subgroup
+  const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+  
+  //stack the data? --> stack per subgroup
+  const stackedData = d3.stack()
+    .keys(subgroups_Employment)
     (data)
-
-// Highlight a specific subgroup when hovered
-// Show the bars
-svgG4Employment.append("g")
+  
+  // Highlight a specific subgroup when hovered
+  // Show the bars
+  svg_G4Employment.append("g")
     .selectAll("g")
     // Enter in the stack data = loop key per key = group per group
     .data(stackedData)
@@ -494,24 +496,24 @@ svgG4Employment.append("g")
     .attr("width", x.bandwidth())
     .attr("stroke", "grey")
     .on("mouseover", function(event, d) { // What happens when user hover a bar
-
+  
         // what subgroup are we hovering?
-        const subGroupName_employment = d3.select(this.parentNode).datum().key
-
+        const subGroupName_Employment = d3.select(this.parentNode).datum().key
+  
         // Reduce opacity of all rect to 0.2
         d3.selectAll(".myRect").style("opacity", 0.2)
-
+  
         // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-        d3.selectAll("." + subGroupName_employment).style("opacity", 1)
+        d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
     })
     .on("mouseleave", function(event, d) { // When user do not hover anymore
-
+  
         // Back to normal opacity: 1
         d3.selectAll(".myRect")
             .style("opacity", 1)
     })
-
-})
+  
+  })
 
 
 
