@@ -362,9 +362,9 @@ d3.csv("./data/Experience-Graph3.csv").then(function(data) {
 // ----------------
 
     // set the dimensions and margins of the graph
-    const margin_G3treemap = {top: 10, right: 10, bottom: 10, left: 10},
-    width_G3treemap = 445 - margin_G3treemap.left - margin_G3treemap.right,
-    height_G3treemap = 445 - margin_G3treemap.top - margin_G3treemap.bottom;
+    const margin_G3treemap = {top: 10, right: 50, bottom: 200, left: 22},
+    width_G3treemap = 900 - margin_G3treemap.left - margin_G3treemap.right,
+    height_G3treemap = 500 - margin_G3treemap.top - margin_G3treemap.bottom;
   
   // append the svg object to the body of the page
   const svg_G3treemap = d3.select("#Graph3_Treemap")
@@ -374,7 +374,7 @@ d3.csv("./data/Experience-Graph3.csv").then(function(data) {
   .append("g")
     .attr("transform",
           `translate(${margin_G3treemap.left}, ${margin_G3treemap.top})`);
-  
+
   // Read data
   d3.csv('./data/Experience-Graph3-TreeMap.csv').then(function(data) {
   
@@ -389,7 +389,7 @@ d3.csv("./data/Experience-Graph3.csv").then(function(data) {
     // The coordinates are added to the root object above
     d3.treemap()
       .size([width_G3treemap, height_G3treemap])
-      .padding(4)
+      .padding(6)
       (root)
   
     // use this information to add rectangles:
@@ -401,8 +401,8 @@ d3.csv("./data/Experience-Graph3.csv").then(function(data) {
         .attr('y', function (d) { return d.y0; })
         .attr('width', function (d) { return d.x1 - d.x0; })
         .attr('height', function (d) { return d.y1 - d.y0; })
-        .style("stroke", "black")
-        .style("fill", "#69b3a2");
+          .style("stroke", "black")
+       .style("fill", "#69b3a2");
   
     // and to add the text labels
     svg_G3treemap
@@ -415,8 +415,6 @@ d3.csv("./data/Experience-Graph3.csv").then(function(data) {
         .attr("font-size", "15px")
         .attr("fill", "white")
   })
-  
-
 
 // ----------------
 // GRAPH 4 - Employment  
