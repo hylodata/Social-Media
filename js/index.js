@@ -684,7 +684,7 @@ svg_G4jobmatch.append("g")
     .data(stackedData)
     .join("g")
     .attr("fill", d => color(d.key))
-    .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
+    .attr("class", d => "myRectJ " + d.key) // Add a class to each subgroup: their name
     .selectAll("rect")
     // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(d => d)
@@ -700,7 +700,7 @@ svg_G4jobmatch.append("g")
         const subGroupName_jobmatch = d3.select(this.parentNode).datum().key
 
         // Reduce opacity of all rect to 0.2
-        d3.selectAll(".myRect").style("opacity", 0.2)
+        d3.selectAll(".myRectJ").style("opacity", 0.2)
 
         // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
         d3.selectAll("." + subGroupName_jobmatch).style("opacity", 1)
@@ -708,7 +708,7 @@ svg_G4jobmatch.append("g")
     .on("mouseleave", function(event, d) { // When user do not hover anymore
 
         // Back to normal opacity: 1
-        d3.selectAll(".myRect")
+        d3.selectAll(".myRectJ")
             .style("opacity", 1)
     })
 
@@ -784,7 +784,7 @@ svg_G4earnings.append("g")
     .data(stackedData)
     .join("g")
     .attr("fill", d => color(d.key))
-    .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
+    .attr("class", d => "myRectE " + d.key) // Add a class to each subgroup: their name
     .selectAll("rect")
     // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(d => d)
@@ -800,7 +800,7 @@ svg_G4earnings.append("g")
         const subGroupName_earnings = d3.select(this.parentNode).datum().key
 
         // Reduce opacity of all rect to 0.2
-        d3.selectAll(".myRect").style("opacity", 0.2)
+        d3.selectAll(".myRectE").style("opacity", 0.2)
 
         // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
         d3.selectAll("." + subGroupName_earnings).style("opacity", 1)
@@ -808,7 +808,7 @@ svg_G4earnings.append("g")
     .on("mouseleave", function(event, d) { // When user do not hover anymore
 
         // Back to normal opacity: 1
-        d3.selectAll(".myRect")
+        d3.selectAll(".myRectE")
             .style("opacity", 1)
     })
 
