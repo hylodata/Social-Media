@@ -96,14 +96,14 @@ nav {
 
 #intro {
     max-width: 40rem;
-    margin: 1rem auto;
+    margin: 2rem auto;
     text-align: left;
     margin-bottom: 60px;
 }
 
 .intro__hed {
     max-width: 40rem;
-    margin: 1rem auto;
+    margin: 2rem auto;
     text-align: left;
 }
 
@@ -116,7 +116,7 @@ nav {
 
 .section__hed {
     max-width: 40rem;
-    margin: 1rem auto;
+    margin: 1.5rem auto;
     text-align: left;
 }
 

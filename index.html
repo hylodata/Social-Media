@@ -15,7 +15,7 @@
         #scrolly {
             position: relative;
             background-color: #f3f3f3;
-            padding: .1rem;
+            padding: .01rem;
         }
 
         article {
@@ -25,24 +25,24 @@
             margin: 0 auto;
         }
 
-     .sticky-thing {
-       position: -webkit-sticky;
-       position: sticky;
-       left: 0;
-       width: 100%;
-       margin: 0;
-       background-color: #f3f3f3;
-       z-index: 0;
-       top: .1vh;
-       height: 100vh;
-       /* Center everything inside */
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       background-image: url('images//TOP-VIEW.jpg');
-       background-size: cover;
-       background-position: center center;
-     }
+        .sticky-thing {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            background-color: #f3f3f3;
+            z-index: 0;
+            top: 0;
+            height: 100vh;
+            /* Center everything inside */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('images//TORONTO.jpg');
+            background-size: cover;
+            background-position: center center;
+        }
 
         .sticky-thing p {
             font-size: 8rem;
@@ -53,6 +53,7 @@
         .step {
             margin: 0 auto 35rem auto;
             color: #fff;
+            border-radius: 7px;
             background-color: rgba(0, 0, 0, 0.4);
         }
 
@@ -61,7 +62,8 @@
         }
 
         .step.is-active p {
-            background-color: rgba(0, 76, 155, 0.7);
+            border-radius: 7px;
+            background-color: rgba(0, 76, 155, 0.8);
             color: #3b3b3b5;
         }
 
@@ -69,7 +71,7 @@
             text-align: center;
             padding: 2rem;
             font-size: 1.5rem;
-            background-color: rgba(0, 76, 155, 0.7);
+            background-color: rgba(0, 76, 155, 0.8);
         }
 
         .visualization {
@@ -77,12 +79,27 @@
         }
 
         .button {
-            background-color: rgba(0, 76, 155, 0.7);
-            ;
-            color: black;
+            padding: 5px;
             text-align: center;
             font-size: 15px;
             padding: 7px;
+        }
+
+        .button-centered {
+            position: relative;
+            left: 10%;
+            right: 50%;
+            margin-bottom: 5px;
+            padding: 5px;
+            text-align: center;
+            font-size: 15px;
+            /* transform: translate(50%, -50%); */
+        }
+
+        footer {
+            text-align: center;
+            padding: 1px;
+            color: #8a8a8a;
         }
     </style>
 </head>
@@ -101,19 +118,18 @@
            </div>
 	   </nav> -->
 
-
         <section id="scrolly">
-          <div class="sticky-thing">
+            <div class="sticky-thing">
                 <p></p>
             </div>
 
             <article>
-              <div class="step" data-step="">
-              </div>
-                <div class="step" data-step="" data-image=url('images/TOP-VIEW.jpg')>
-                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada before their arrival? Are most new immigrants using it? Is it effective?</p>
+                <div class="step" data-step="">
                 </div>
                 <div class="step" data-step="" data-image=url('images/TORONTO.jpg')>
+                    <p>What happens when prospective immigrants turn to social media to investigate employment opportunities in Canada before their arrival? Are most new immigrants using it? Is it effective?</p>
+                </div>
+                <div class="step" data-step="" data-image=url('images/TOP-VIEW.jpg')>
                     <p>We surveyed 500 recent immigrants to Canada, asking how social media helped them learn about work prospects in Canada prior to their arrival. We then tracked their employment progress over the following year.</p>
                 </div>
                 <div class="step" data-step="" data-image=url('images/CANADA.jpg')>
@@ -158,12 +174,12 @@
                 <!-- <div class="visualization" id="sm_use"></div> -->
 
                 <!-- Add buttons for graph6 -->
-                <button onclick="update('Occupational Licencing requirements')">Occupational Licencing Requirements</button>
-                <button onclick="update('Further Education or skill training information')">Further Education or Skill Training</button>
-                <button onclick="update('Job Search tips and advice ')">Job Search Advice </button>
-                <button onclick="update('Interview tips and advice')">Job Interview Advice</button>
-                <button onclick="update('English or French training information')">English or French Training</button>
-                <button onclick="update('Salary information')">Salary Information</button>
+                <button class="button-centered" onclick="update('Occupational Licencing requirements')">Occupational Licencing Requirements</button>
+                <button class="button-centered" onclick="update('Further Education or skill training information')">Further Education or Skill Training</button>
+                <button class="button" onclick="update('Job Search tips and advice ')">Job Search Advice </button>
+                <button class="button" onclick="update('Interview tips and advice')">Job Interview Advice</button>
+                <button class="button" onclick="update('English or French training information')">English or French Training</button>
+                <button class="button" onclick="update('Salary information')">Salary Information</button>
             </p>
 
             <div id="Graph6"></div>
@@ -180,8 +196,11 @@
             <h2 class="section__hed">Post-Arrival Labour Outcomes</h2>
             <p class="prearrival__dek">
                 How did the use of social media affect newcomers' ability to establish themselves in the Canadian labour market? These graphs depict differences in labour market outcomes between those who used social media before arrival to search for labour market information and those who did not. Hover over the sections for more information.
+            <p class="prearrival__dek" style="color: #004c9b;"><b>did not use social media before arrival.</b></p>
+            <p class="prearrival__dek" style="color: #ffdc00;">used social media before arrival.</p>
 
-                <!-- In the first six months of arrival, those who used social media had big advantage in getting established in the labour market  (3 to 1 advantage) -->
+
+            <!-- In the first six months of arrival, those who used social media had big advantage in getting established in the labour market  (3 to 1 advantage) -->
             </p>
             <!-- Create a div where the graph will take place -->
             <!-- <div class="visualization" id="my_dataviz"></div> -->
@@ -213,18 +232,33 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed velit dignissim sodales ut eu sem integer vitae justo. At urna condimentum mattis pellentesque. Dignissim convallis aenean et tortor at risus viverra. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Ipsum a arcu cursus vitae congue mauris. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Fermentum dui faucibus in ornare. Enim sit amet venenatis urna cursus eget nunc. Amet mauris commodo quis imperdiet massa tincidunt nunc. Egestas integer eget aliquet nibh praesent. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Sed vulputate odio ut enim blandit volutpat. Curabitur vitae nunc sed velit. Mi in nulla posuere sollicitudin aliquam. Sagittis orci a scelerisque purus semper eget duis at tellus. Est ullamcorper eget nulla facilisi etiam dignissim diam quis.
             </p>
         </section>
+
+        <footer>
+            <img src="images/tmu_small.png" href="https://www.torontomu.ca/cerc-migration/" />
+        </footer>
+
     </main>
 
-    <!-- Load d3.js -->
+    <!-- Load js files from cloud -->
+    <!-- <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+	 <script src="https://unpkg.com/scrollama"></script>
+	 <script src="https://d3js.org/d3.v6.js"></script>
+	 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	 <script src="js/index.js"></script> -->
+
+    <!-- unused js files -->
     <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
-    <script src="https://d3js.org/d3.v6.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <!-- <script src="./js/stacked.js"></script> -->
-    <script src="js/index.js"></script>
     <!-- <script src="./js/sm_use.js"></script> -->
     <!-- <div class='debug'></div> -->
-    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
-    <script src="https://unpkg.com/scrollama"></script>
+
+    <!-- Load js files locally -->
+    <script src="js/intersection-observer.js"></script>
+    <script src="js/scrollama.js"></script>
+    <script src="js/d3.v6.js"></script>
+    <script src="js/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/index.js"></script>
+
     <script>
         // move all of this into its own separate js
         var main = document.querySelector("main");
@@ -263,7 +297,7 @@
             scroller
                 .setup({
                     step: "#scrolly article .step",
-                    offset: 0.70,
+                    offset: 0.7,
                     // turn debug back on to see where transitions are
                     debug: false
                 })
