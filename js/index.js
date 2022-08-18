@@ -480,7 +480,7 @@ const svg_G4Employment = d3.select("#Graph4_Employment")
     .attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
 
 // Parse the Data
-d3.csv("../data/Employment-Graph4.csv").then(function(data) {
+d3.csv("./data/Employment-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
     const subgroups_Employment = data.columns.slice(1)
@@ -533,23 +533,23 @@ d3.csv("../data/Employment-Graph4.csv").then(function(data) {
         .attr("height", d => y(d[0]) - y(d[1]))
         .attr("width", x.bandwidth())
         .attr("stroke", "grey")
-        // .on("mouseover", function(event, d) { // What happens when user hover a bar
+        .on("mouseover", function(event, d) { // What happens when user hover a bar
 
-        //     // what subgroup are we hovering?
-        //     const subGroupName_Employment = d3.select(this.parentNode).datum().key
+            // what subgroup are we hovering?
+            const subGroupName_Employment = d3.select(this.parentNode).datum().key
 
-        //     // Reduce opacity of all rect to 0.2
-        //     d3.selectAll(".myRect").style("opacity", 0.2)
+            // Reduce opacity of all rect to 0.2
+            d3.selectAll(".myRect").style("opacity", 0.2)
 
-        //     // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-        //     d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
-        // })
-        // .on("mouseleave", function(event, d) { // When user do not hover anymore
+            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+            d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
+        })
+        .on("mouseleave", function(event, d) { // When user do not hover anymore
 
-        //     // Back to normal opacity: 1
-        //     d3.selectAll(".myRect")
-        //         .style("opacity", 1)
-        // })
+            // Back to normal opacity: 1
+            d3.selectAll(".myRect")
+                .style("opacity", 1)
+        })
 
 })
 
@@ -577,7 +577,7 @@ const svg_G4Precarity = d3.select("#Graph4_Precarity")
     .attr("transform", `translate(${margin_G4Precarity.left},${margin_G4Precarity.top})`);
 
 // Parse the Data
-d3.csv("../data/Precarity-Graph4.csv").then(function(data) {
+d3.csv("./data/Precarity-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
     const subgroups_precarity = data.columns.slice(1)
@@ -673,7 +673,7 @@ const svg_G4earnings = d3.select("#Graph4_Earnings")
     .attr("transform", `translate(${margin_G4earnings.left},${margin_G4earnings.top})`);
 
 // Parse the Data
-d3.csv("../data/Earnings-Graph4.csv").then(function(data) {
+d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
     const subgroups_earnings = data.columns.slice(1)
@@ -773,7 +773,7 @@ const svg_G4jobmatch = d3.select("#Graph4_JobMatch")
     .attr("transform", `translate(${margin_G4jobmatch.left},${margin_G4jobmatch.top})`);
 
 // Parse the Data
-d3.csv("../data/JobMatch-Graph4.csv").then(function(data) {
+d3.csv("./data/JobMatch-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
     const subgroups_jobmatch = data.columns.slice(1)
@@ -807,9 +807,6 @@ d3.csv("../data/JobMatch-Graph4.csv").then(function(data) {
     const stackedData = d3.stack()
         .keys(subgroups_jobmatch)
         (data)
-
-
-
 
     // ----------------
     // Highlight a specific subgroup when hovered
