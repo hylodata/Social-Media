@@ -103,20 +103,20 @@ nav {
 
 .intro__hed {
     max-width: 40rem;
-    margin: 2rem auto;
+    margin: 10rem auto 2rem auto;
     text-align: left;
 }
 
 .intro__dek {
     max-width: 40rem;
-    margin: 1rem auto;
+    margin: 1rem auto 10rem auto;
     text-align: left;
     color: #8a8a8a;
 }
 
 .section__hed {
     max-width: 40rem;
-    margin: 1.5rem auto;
+    margin: 2rem auto;
     text-align: left;
 }
 
@@ -137,7 +137,7 @@ nav {
 
 .prearrival__dek {
     max-width: 40rem;
-    margin: 1rem auto;
+    margin: 2rem auto 2rem auto;
     text-align: left;
 }
 

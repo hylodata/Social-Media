@@ -465,11 +465,11 @@ d3.csv('./data/Experience-Graph3-TreeMap.csv').then(function(data) {
 const margin_G4Employment = {
         top: 10,
         right: 30,
-        bottom: 300,
+        bottom: 200,
         left: 100
     },
     width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
-    height_G4Employment = 600 - margin_G4Employment.top - margin_G4Employment.bottom;
+    height_G4Employment = 500 - margin_G4Employment.top - margin_G4Employment.bottom;
 
 // append the svg object to the body of the page
 const svg_G4Employment = d3.select("#Graph4_Employment")
