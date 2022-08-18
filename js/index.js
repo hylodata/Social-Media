@@ -533,23 +533,23 @@ d3.csv("../data/Employment-Graph4.csv").then(function(data) {
         .attr("height", d => y(d[0]) - y(d[1]))
         .attr("width", x.bandwidth())
         .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
+        // .on("mouseover", function(event, d) { // What happens when user hover a bar
 
-            // what subgroup are we hovering?
-            const subGroupName_Employment = d3.select(this.parentNode).datum().key
+        //     // what subgroup are we hovering?
+        //     const subGroupName_Employment = d3.select(this.parentNode).datum().key
 
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRect").style("opacity", 0.2)
+        //     // Reduce opacity of all rect to 0.2
+        //     d3.selectAll(".myRect").style("opacity", 0.2)
 
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
+        //     // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+        //     d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
+        // })
+        // .on("mouseleave", function(event, d) { // When user do not hover anymore
 
-            // Back to normal opacity: 1
-            d3.selectAll(".myRect")
-                .style("opacity", 1)
-        })
+        //     // Back to normal opacity: 1
+        //     d3.selectAll(".myRect")
+        //         .style("opacity", 1)
+        // })
 
 })
 
