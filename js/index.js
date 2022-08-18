@@ -658,11 +658,11 @@ d3.csv("../data/Precarity-Graph4.csv").then(function(data) {
 const margin_G4earnings = {
         top: 10,
         right: 30,
-        bottom: 300,
+        bottom: 250,
         left: 100
     },
     width_G4earnings = 900 - margin_G4earnings.left - margin_G4earnings.right,
-    height_G4earnings = 600 - margin_G4earnings.top - margin_G4earnings.bottom;
+    height_G4earnings = 550 - margin_G4earnings.top - margin_G4earnings.bottom;
 
 // append the svg object to the body of the page
 const svg_G4earnings = d3.select("#Graph4_Earnings")
@@ -758,11 +758,11 @@ d3.csv("../data/Earnings-Graph4.csv").then(function(data) {
 const margin_G4jobmatch = {
         top: 10,
         right: 30,
-        bottom: 300,
+        bottom: 200,
         left: 100
     },
     width_G4jobmatch = 900 - margin_G4jobmatch.left - margin_G4jobmatch.right,
-    height_G4jobmatch = 600 - margin_G4jobmatch.top - margin_G4jobmatch.bottom;
+    height_G4jobmatch = 500 - margin_G4jobmatch.top - margin_G4jobmatch.bottom;
 
 // append the svg object to the body of the page
 const svg_G4jobmatch = d3.select("#Graph4_JobMatch")
