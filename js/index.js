@@ -1,6 +1,6 @@
-// ------------------------------------------
-// GRAPH 1 - Social Media Use and Connections
-// ------------------------------------------
+// ----------------
+// SOCIAL MEDIA USE
+// ----------------
 
 // graph dimensions
 const margin_graph2 = {
@@ -33,6 +33,7 @@ d3.csv("./data/sm_use.csv").then(function(data) {
         .call(d3.axisBottom(x))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-55)")
+        .style("font-size", "20px")
         .style("text-anchor", "end");
 
     // Y axis
@@ -54,9 +55,9 @@ d3.csv("./data/sm_use.csv").then(function(data) {
 
 })
 
-// ------------------------------------------
-// GRAPH 2m - Male Gendered
-// ------------------------------------------
+// --------------------
+// SM USE MALE GENDERED
+// --------------------
 
 // graph dimensions
 const margin_graph2m = {
@@ -89,6 +90,7 @@ d3.csv("./data/sm_use_gender.csv").then(function(data) {
         .call(d3.axisBottom(x))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-55)")
+        .style("font-size", "20px")
         .style("text-anchor", "end");
 
     // Y axis
@@ -110,9 +112,9 @@ d3.csv("./data/sm_use_gender.csv").then(function(data) {
 
 })
 
-// ------------------------------------------
-// GRAPH 2f - Female Gendered
-// ------------------------------------------
+// ----------------------
+// SM USE FEMALE GENDERED
+// ----------------------
 
 // graph dimensions
 const margin_graph2f = {
@@ -145,6 +147,7 @@ d3.csv("./data/sm_use_gender.csv").then(function(data) {
         .call(d3.axisBottom(x))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-55)")
+        .style("font-size", "20px")
         .style("text-anchor", "end");
 
     // Y axis
@@ -166,70 +169,9 @@ d3.csv("./data/sm_use_gender.csv").then(function(data) {
 
 })
 
-// ----------------
-// GRAPH 5
-// ----------------
-
-// set the dimensions and margins of the graph
-const margin_graph5 = {
-        top: 30,
-        right: 30,
-        bottom: 300,
-        left: 140
-    },
-    width_graph5 = 900 - margin_graph5.left - margin_graph5.right,
-    height_graph5 = 600 - margin_graph5.top - margin_graph5.bottom;
-
-// append the svg object to the body of the page
-const svg_graph5 = d3.select("#Graph5")
-    .append("svg")
-    .attr("width", width_graph5 + margin_graph5.left + margin_graph5.right)
-    .attr("height", height_graph5 + margin_graph5.top + margin_graph5.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_graph5.left},${margin_graph5.top})`);
-
-// Parse the Data
-d3.csv("./data/Freq-Graph5.csv").then(function(data) {
-
-    // X axis
-    const x = d3.scaleBand()
-        .range([0, width_graph5])
-        .domain(data.map(d => d.Parameter))
-        .padding(0.2);
-    svg_graph5.append("g")
-        .attr("transform", `translate(0, ${height_graph5})`)
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-55)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    const y = d3.scaleLinear()
-        .domain([0, 60])
-        .range([height_graph5, 0]);
-    svg_graph5.append("g")
-        .call(d3.axisLeft(y));
-
-    var color = d3.scaleOrdinal([`#002d72`, `#0077c8`, `#5bc2f4`]);
-
-    // Bars
-    svg_graph5.selectAll("mybar")
-        .data(data)
-        .join("rect")
-        .attr("x", d => x(d.Parameter))
-        .attr("y", d => y(d.Percent))
-        .attr("width", x.bandwidth())
-        .attr("height", d => height_graph5 - y(d.Percent))
-        .attr("fill", function(d, i) {
-            return color(i);
-        })
-    // .attr("fill", "#0099ff")
-
-})
-
-// -------------------------
-// GRAPH 6 - MIXED RESOURCES
-// -------------------------
+// --------------
+// BEST PLATFORMS
+// --------------
 
 // set the dimensions and margins of the graph
 const margin_graph6 = {
@@ -274,6 +216,7 @@ function update(selectedVar) {
         xAxis.transition().duration(1000).call(d3.axisBottom(x))
             .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-55)")
+            .style("font-size", "20px")
             .style("text-anchor", "end");
 
         // Add Y axis
@@ -300,563 +243,13 @@ function update(selectedVar) {
 // Initialize plot
 update('Occupational Licencing requirements')
 
-
-// ----------------
-// GRAPH 3
-// ----------------
-
-// set the dimensions and margins of the graph
-const margin_graph3 = {
-        top: 30,
-        right: 30,
-        bottom: 500,
-        left: 140
-    },
-    width_graph3 = 900 - margin_graph3.left - margin_graph3.right,
-    height_graph3 = 800 - margin_graph3.top - margin_graph3.bottom;
-
-// append the svg object to the body of the page
-const svg_graph3 = d3.select("#Graph3")
-    .append("svg")
-    .attr("width", width_graph3 + margin_graph3.left + margin_graph3.right)
-    .attr("height", height_graph3 + margin_graph3.top + margin_graph3.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_graph3.left},${margin_graph3.top})`);
-
-// Parse the Data
-d3.csv("./data/Experience-Graph3.csv").then(function(data) {
-
-    // X axis
-    const x = d3.scaleBand()
-        .range([0, width_graph3])
-        .domain(data.map(d => d.Experience))
-        .padding(0.2);
-    svg_graph3.append("g")
-        .attr("transform", `translate(0, ${height_graph3})`)
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-55)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    const y = d3.scaleLinear()
-        .domain([0, 180])
-        .range([height_graph3, 0]);
-    svg_graph3.append("g")
-        .call(d3.axisLeft(y));
-
-    // Bars
-    svg_graph3.selectAll("mybar")
-        .data(data)
-        .join("rect")
-        .attr("x", d => x(d.Experience))
-        .attr("y", d => y(d.value))
-        .attr("width", x.bandwidth())
-        .attr("height", d => height_graph3 - y(d.value))
-        .attr("fill", "#ffdc00")
-
-})
-
-// ----------------
-// GRAPH 3 - TreeMap
-// ----------------
-
-// set the dimensions and margins of the graph
-const margin_G3treemap = {
-        top: 50,
-        right: 30,
-        bottom: 100,
-        left: 50
-    },
-
-    width_G3treemap = 900 - margin_G3treemap.left - margin_G3treemap.right,
-    height_G3treemap = 600 - margin_G3treemap.top - margin_G3treemap.bottom;
-
-// append the svg object to the body of the page
-const svg_G3treemap = d3.select("#Graph3_Treemap")
-    .append("svg")
-    .attr("width", width_G3treemap + margin_G3treemap.left + margin_G3treemap.right)
-    .attr("height", height_G3treemap + margin_G3treemap.top + margin_G3treemap.bottom)
-    .append("g")
-    .attr("transform",
-        `translate(${margin_G3treemap.left}, ${margin_G3treemap.top})`);
-
-// Read data
-d3.csv('./data/Experience-Graph3-TreeMap.csv').then(function(data) {
-
-    // stratify the data: reformatting for d3.js
-    const root = d3.stratify()
-        .id(function(d) {
-            return d.Experience;
-        }) // Name of the entity (column name is name in csv)
-        .parentId(function(d) {
-            return d.parent;
-        }) // Name of the parent (column name is parent in csv)
-    (data);
-    root.sum(function(d) {
-        return +d.value
-    }) // Compute the numeric value for each entity
-
-    // Then d3.treemap computes the position of each element of the hierarchy
-    // The coordinates are added to the root object above
-    d3.treemap()
-        .size([width_G3treemap, height_G3treemap])
-        .padding(4)
-        (root);
-
-    // use this information to add rectangles:
-    svg_G3treemap
-        .selectAll("rect")
-        .data(root.leaves())
-        .join("rect")
-        .attr('x', function(d) {
-            return d.x0;
-        })
-        .attr('y', function(d) {
-            return d.y0;
-        })
-        .attr('width', function(d) {
-            return d.x1 - d.x0;
-        })
-        .attr('height', function(d) {
-            return d.y1 - d.y0;
-        })
-        .style("stroke", "black")
-        // .style("fill", function(d) { return colorScale(d.value)});
-        // .style("fill", function(d) { return color(d.data.parent)});    
-        .style("fill", "#0077c8");
-
-    // d3.scaleOrdinal([`#002d72`, `#0077c8`, `#5bc2f4`])
-
-    // and to add the text labels
-    svg_G3treemap
-        .selectAll("text")
-        .data(root.leaves())
-        .join("text")
-        .attr("x", function(d) {
-            return d.x0 + 20
-        }) // +10 to adjust position (more right)
-        .attr("y", function(d) {
-            return d.y0 + 40
-        }) // +20 to adjust position (lower)
-        .text(function(d) {
-            return d.data.value
-        })
-        .attr("font-size", "20px")
-        .attr("fill", "white")
-
-    //     // Adding tooltip for info on hover
-    // const tooltip = d3.select('svg#canvas')
-    //                   .append('div')
-    //                   .attr('id', 'tooltip')
-    //                   .attr('width', 60 + 'px')
-    //                   .attr('height', 40 + 'px')
-    //                   .style('z-index', 10)
-    //                   .style('display', 'none')
-    //                   .style('position', 'absolute');
-})
-
-
-// ----------------
-// GRAPH 4 - Employment  
-// ----------------
-
-// set the dimensions and margins of graph 2
-const margin_G4Employment = {
-        top: 10,
-        right: 30,
-        bottom: 200,
-        left: 100
-    },
-    width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
-    height_G4Employment = 500 - margin_G4Employment.top - margin_G4Employment.bottom;
-
-// append the svg object to the body of the page
-const svg_G4Employment = d3.select("#Graph4_Employment")
-    .append("svg")
-    .attr("width", width_G4Employment + margin_G4Employment.left + margin_G4Employment.right)
-    .attr("height", height_G4Employment + margin_G4Employment.top + margin_G4Employment.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
-
-// Parse the Data
-d3.csv("./data/Employment-Graph4.csv").then(function(data) {
-
-    // List of subgroups = header of the csv files = soil condition here
-    const subgroups_Employment = data.columns.slice(1)
-
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups_Employment = data.map(d => d.G)
-
-    // Add X axis
-    const x = d3.scaleBand()
-        .domain(groups_Employment)
-        .range([0, width_G4Employment])
-        .padding([0.2])
-    svg_G4Employment.append("g")
-        .attr("transform", `translate(0, ${height_G4Employment})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-55)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    const y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height_G4Employment, 0]);
-    svg_G4Employment.append("g")
-        .call(d3.axisLeft(y));
-
-    // color palette = one color per subgroup
-    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
-
-    //stack the data? --> stack per subgroup
-    const stackedData = d3.stack()
-        .keys(subgroups_Employment)
-        (data)
-
-    // Highlight a specific subgroup when hovered
-    // Show the bars
-    svg_G4Employment.append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackedData)
-        .join("g")
-        .attr("fill", d => color(d.key))
-        .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data(d => d)
-        .join("rect")
-        .attr("x", d => x(d.data.G))
-        .attr("y", d => y(d[1]))
-        .attr("height", d => y(d[0]) - y(d[1]))
-        .attr("width", x.bandwidth())
-        .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
-
-            // what subgroup are we hovering?
-            const subGroupName_Employment = d3.select(this.parentNode).datum().key
-
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRect").style("opacity", 0.2)
-
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
-
-            // Back to normal opacity: 1
-            d3.selectAll(".myRect")
-                .style("opacity", 1)
-        })
-
-})
-
-
-// ----------------
-// GRAPH 4 - precarity NOT USED
-// ----------------
-
-// set the dimensions and margins of graph 2
-const margin_G4Precarity = {
-        top: 10,
-        right: 30,
-        bottom: 300,
-        left: 100
-    },
-    width_G4Precarity = 900 - margin_G4Precarity.left - margin_G4Precarity.right,
-    height_G4Precarity = 600 - margin_G4Precarity.top - margin_G4Precarity.bottom;
-
-// append the svg object to the body of the page
-const svg_G4Precarity = d3.select("#Graph4_Precarity")
-    .append("svg")
-    .attr("width", width_G4Precarity + margin_G4Precarity.left + margin_G4Precarity.right)
-    .attr("height", height_G4Precarity + margin_G4Precarity.top + margin_G4Precarity.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_G4Precarity.left},${margin_G4Precarity.top})`);
-
-// Parse the Data
-d3.csv("./data/Precarity-Graph4.csv").then(function(data) {
-
-    // List of subgroups = header of the csv files = soil condition here
-    const subgroups_precarity = data.columns.slice(1)
-
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups_precarity = data.map(d => d.G1)
-
-    // Add X axis
-    const x = d3.scaleBand()
-        .domain(groups_precarity)
-        .range([0, width_G4Precarity])
-        .padding([0.2])
-    svg_G4Precarity.append("g")
-        .attr("transform", `translate(0, ${height_G4Precarity})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-55)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    const y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height_G4Precarity, 0]);
-    svg_G4Precarity.append("g")
-        .call(d3.axisLeft(y));
-
-    // color palette = one color per subgroup
-    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
-
-    //stack the data? --> stack per subgroup
-    const stackedData = d3.stack()
-        .keys(subgroups_precarity)
-        (data)
-
-    // Highlight a specific subgroup when hovered
-    // Show the bars
-    svg_G4Precarity.append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackedData)
-        .join("g")
-        .attr("fill", d => color(d.key))
-        .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data(d => d)
-        .join("rect")
-        .attr("x", d => x(d.data.G1))
-        .attr("y", d => y(d[1]))
-        .attr("height", d => y(d[0]) - y(d[1]))
-        .attr("width", x.bandwidth())
-        .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
-
-            // what subgroup are we hovering?
-            const subGroupName_precarity = d3.select(this.parentNode).datum().key
-
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRect").style("opacity", 0.2)
-
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_precarity).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
-
-            // Back to normal opacity: 1
-            d3.selectAll(".myRect")
-                .style("opacity", 1)
-        })
-
-})
-
-// ----------------
-// GRAPH 4 - Earnings
-// ----------------
-
-// set the dimensions and margins of the graph
-const margin_G4earnings = {
-        top: 10,
-        right: 30,
-        bottom: 250,
-        left: 100
-    },
-    width_G4earnings = 900 - margin_G4earnings.left - margin_G4earnings.right,
-    height_G4earnings = 550 - margin_G4earnings.top - margin_G4earnings.bottom;
-
-// append the svg object to the body of the page
-const svg_G4earnings = d3.select("#Graph4_Earnings")
-    .append("svg")
-    .attr("width", width_G4earnings + margin_G4earnings.left + margin_G4earnings.right)
-    .attr("height", height_G4earnings + margin_G4earnings.top + margin_G4earnings.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_G4earnings.left},${margin_G4earnings.top})`);
-
-// Parse the Data
-d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
-
-    // List of subgroups = header of the csv files = soil condition here
-    const subgroups_earnings = data.columns.slice(1)
-
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups_earnings = data.map(d => d.G3)
-
-    // Add X axis
-    const x = d3.scaleBand()
-        .domain(groups_earnings)
-        .range([0, width_G4earnings])
-        .padding([0.2])
-    svg_G4earnings.append("g")
-        .attr("transform", `translate(0, ${height_G4earnings})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-55)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    const y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height_G4earnings, 0]);
-    svg_G4earnings.append("g")
-        .call(d3.axisLeft(y));
-
-    // color palette = one color per subgroup
-    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
-
-    //stack the data? --> stack per subgroup
-    const stackedData = d3.stack()
-        .keys(subgroups_earnings)
-        (data)
-
-
-    // ----------------
-    // Highlight a specific subgroup when hovered
-    // ----------------
-
-    // Show the bars
-    svg_G4earnings.append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackedData)
-        .join("g")
-        .attr("fill", d => color(d.key))
-        .attr("class", d => "myRectE " + d.key) // Add a class to each subgroup: their name
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data(d => d)
-        .join("rect")
-        .attr("x", d => x(d.data.G3))
-        .attr("y", d => y(d[1]))
-        .attr("height", d => y(d[0]) - y(d[1]))
-        .attr("width", x.bandwidth())
-        .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
-
-            // what subgroup are we hovering?
-            const subGroupName_earnings = d3.select(this.parentNode).datum().key
-
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRectE").style("opacity", 0.2)
-
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_earnings).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
-
-            // Back to normal opacity: 1
-            d3.selectAll(".myRectE")
-                .style("opacity", 1)
-        })
-
-})
-
-// ----------------
-// GRAPH 4 - JobMatch
-// ----------------
-
-// set the dimensions and margins of the graph
-const margin_G4jobmatch = {
-        top: 10,
-        right: 30,
-        bottom: 200,
-        left: 100
-    },
-    width_G4jobmatch = 900 - margin_G4jobmatch.left - margin_G4jobmatch.right,
-    height_G4jobmatch = 500 - margin_G4jobmatch.top - margin_G4jobmatch.bottom;
-
-// append the svg object to the body of the page
-const svg_G4jobmatch = d3.select("#Graph4_JobMatch")
-    .append("svg")
-    .attr("width", width_G4jobmatch + margin_G4jobmatch.left + margin_G4jobmatch.right)
-    .attr("height", height_G4jobmatch + margin_G4jobmatch.top + margin_G4jobmatch.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_G4jobmatch.left},${margin_G4jobmatch.top})`);
-
-// Parse the Data
-d3.csv("./data/JobMatch-Graph4.csv").then(function(data) {
-
-    // List of subgroups = header of the csv files = soil condition here
-    const subgroups_jobmatch = data.columns.slice(1)
-
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups_jobmatch = data.map(d => d.G2)
-
-    // Add X axis
-    const x = d3.scaleBand()
-        .domain(groups_jobmatch)
-        .range([0, width_G4jobmatch])
-        .padding([0.2])
-    svg_G4jobmatch.append("g")
-        .attr("transform", `translate(0, ${height_G4jobmatch})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-55)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    const y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height_G4jobmatch, 0]);
-    svg_G4jobmatch.append("g")
-        .call(d3.axisLeft(y));
-
-    // color palette = one color per subgroup
-    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
-
-    //stack the data? --> stack per subgroup
-    const stackedData = d3.stack()
-        .keys(subgroups_jobmatch)
-        (data)
-
-    // ----------------
-    // Highlight a specific subgroup when hovered
-    // ----------------
-
-    // Show the bars
-    svg_G4jobmatch.append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackedData)
-        .join("g")
-        .attr("fill", d => color(d.key))
-        .attr("class", d => "myRectJ " + d.key) // Add a class to each subgroup: their name
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data(d => d)
-        .join("rect")
-        .attr("x", d => x(d.data.G2))
-        .attr("y", d => y(d[1]))
-        .attr("height", d => y(d[0]) - y(d[1]))
-        .attr("width", x.bandwidth())
-        .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
-
-            // what subgroup are we hovering?
-            const subGroupName_jobmatch = d3.select(this.parentNode).datum().key
-
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRectJ").style("opacity", 0.2)
-
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_jobmatch).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
-
-            // Back to normal opacity: 1
-            d3.selectAll(".myRectJ")
-                .style("opacity", 1)
-        })
-
-})
-
-
-// ----------------
-// GRAPH 3 - Bubble
-// ----------------
+// ------------------------
+// WIDE RANGE OF EXPERIENCE
+// ------------------------
 
 // set the dimensions and margins of the graph
 const width = 900
-const height = 500
+const height = 600
 
 // append the svg object to the body of the page
 const svg = d3.select("#bubblegraph")
@@ -880,18 +273,24 @@ d3.csv("./data/bubble.csv").then(function(data) {
     // Size scale
     const size = d3.scaleLinear()
         .domain([0, 170])
-        .range([20, 100]) // circle will be between 7 and 55 px wide
+        .range([20, 120]) // circle size
 
     // create a tooltip
     const Tooltip = d3.select("#bubblegraph")
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        .style("background-color", "white")
+        // .style("position", "absolute")
+        .style("background-color", "#cce5ff")
         .style("border", "solid")
         .style("border-width", "2px")
         .style("border-radius", "5px")
         .style("padding", "5px")
+          .style("text-align", "center")
+	  .style("max-width", "40rem")
+	  .style("margin", "1rem auto 2rem auto")
+    // .style("width", "500px")
+    // .style("height", "200px")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function(event, d) {
@@ -968,25 +367,223 @@ d3.csv("./data/bubble.csv").then(function(data) {
 
 })
 
+// -------------------
+// EMPLOYMENT OUTCOMES  
+// -------------------
+
+// set the dimensions and margins of graph 2
+const margin_G4Employment = {
+        top: 10,
+        right: 30,
+        bottom: 200,
+        left: 100
+    },
+    width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
+    height_G4Employment = 500 - margin_G4Employment.top - margin_G4Employment.bottom;
+
+// append the svg object to the body of the page
+const svg_G4Employment = d3.select("#Graph4_Employment")
+    .append("svg")
+    .attr("width", width_G4Employment + margin_G4Employment.left + margin_G4Employment.right)
+    .attr("height", height_G4Employment + margin_G4Employment.top + margin_G4Employment.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
+
+// Parse the Data
+d3.csv("./data/Employment-Graph4.csv").then(function(data) {
+
+    // List of subgroups = header of the csv files = soil condition here
+    const subgroups_Employment = data.columns.slice(1)
+
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    const groups_Employment = data.map(d => d.G)
+
+    // Add X axis
+    const x = d3.scaleBand()
+        .domain(groups_Employment)
+        .range([0, width_G4Employment])
+        .padding([0.2])
+    svg_G4Employment.append("g")
+        .attr("transform", `translate(0, ${height_G4Employment})`)
+        .call(d3.axisBottom(x).tickSizeOuter(0))
+        .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-55)")
+        .style("font-size", "20px")
+        .style("text-anchor", "end");
+
+    // Add Y axis
+    const y = d3.scaleLinear()
+        .domain([0, 100])
+        .range([height_G4Employment, 0]);
+    svg_G4Employment.append("g")
+        .call(d3.axisLeft(y));
+
+    // color palette = one color per subgroup
+    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+
+    //stack the data? --> stack per subgroup
+    const stackedData = d3.stack()
+        .keys(subgroups_Employment)
+        (data)
+
+    // Highlight a specific subgroup when hovered
+    // Show the bars
+    svg_G4Employment.append("g")
+        .selectAll("g")
+        // Enter in the stack data = loop key per key = group per group
+        .data(stackedData)
+        .join("g")
+        .attr("fill", d => color(d.key))
+        .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
+        .selectAll("rect")
+        // enter a second time = loop subgroup per subgroup to add all rectangles
+        .data(d => d)
+        .join("rect")
+        .attr("x", d => x(d.data.G))
+        .attr("y", d => y(d[1]))
+        .attr("height", d => y(d[0]) - y(d[1]))
+        .attr("width", x.bandwidth())
+        .attr("stroke", "grey")
+        .on("mouseover", function(event, d) { // What happens when user hover a bar
+
+            // what subgroup are we hovering?
+            const subGroupName_Employment = d3.select(this.parentNode).datum().key
+
+            // Reduce opacity of all rect to 0.2
+            d3.selectAll(".myRect").style("opacity", 0.2)
+
+            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+            d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
+        })
+        .on("mouseleave", function(event, d) { // When user do not hover anymore
+
+            // Back to normal opacity: 1
+            d3.selectAll(".myRect")
+                .style("opacity", 1)
+        })
+
+})
+
+// --------
+// EARNINGS
+// --------
+
+// set the dimensions and margins of the graph
+const margin_G4earnings = {
+        top: 10,
+        right: 30,
+        bottom: 250,
+        left: 100
+    },
+    width_G4earnings = 900 - margin_G4earnings.left - margin_G4earnings.right,
+    height_G4earnings = 550 - margin_G4earnings.top - margin_G4earnings.bottom;
+
+// append the svg object to the body of the page
+const svg_G4earnings = d3.select("#Graph4_Earnings")
+    .append("svg")
+    .attr("width", width_G4earnings + margin_G4earnings.left + margin_G4earnings.right)
+    .attr("height", height_G4earnings + margin_G4earnings.top + margin_G4earnings.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin_G4earnings.left},${margin_G4earnings.top})`);
+
+// Parse the Data
+d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
+
+    // List of subgroups = header of the csv files = soil condition here
+    const subgroups_earnings = data.columns.slice(1)
+
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    const groups_earnings = data.map(d => d.G3)
+
+    // Add X axis
+    const x = d3.scaleBand()
+        .domain(groups_earnings)
+        .range([0, width_G4earnings])
+        .padding([0.2])
+    svg_G4earnings.append("g")
+        .attr("transform", `translate(0, ${height_G4earnings})`)
+        .call(d3.axisBottom(x).tickSizeOuter(0))
+        .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-55)")
+        .style("font-size", "20px")
+        .style("text-anchor", "end");
+
+    // Add Y axis
+    const y = d3.scaleLinear()
+        .domain([0, 100])
+        .range([height_G4earnings, 0]);
+    svg_G4earnings.append("g")
+        .call(d3.axisLeft(y));
+
+    // color palette = one color per subgroup
+    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+
+    //stack the data? --> stack per subgroup
+    const stackedData = d3.stack()
+        .keys(subgroups_earnings)
+        (data)
+
+
+    // ----------------
+    // Highlight a specific subgroup when hovered
+    // ----------------
+
+    // Show the bars
+    svg_G4earnings.append("g")
+        .selectAll("g")
+        // Enter in the stack data = loop key per key = group per group
+        .data(stackedData)
+        .join("g")
+        .attr("fill", d => color(d.key))
+        .attr("class", d => "myRectE " + d.key) // Add a class to each subgroup: their name
+        .selectAll("rect")
+        // enter a second time = loop subgroup per subgroup to add all rectangles
+        .data(d => d)
+        .join("rect")
+        .attr("x", d => x(d.data.G3))
+        .attr("y", d => y(d[1]))
+        .attr("height", d => y(d[0]) - y(d[1]))
+        .attr("width", x.bandwidth())
+        .attr("stroke", "grey")
+        .on("mouseover", function(event, d) { // What happens when user hover a bar
+
+            // what subgroup are we hovering?
+            const subGroupName_earnings = d3.select(this.parentNode).datum().key
+
+            // Reduce opacity of all rect to 0.2
+            d3.selectAll(".myRectE").style("opacity", 0.2)
+
+            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+            d3.selectAll("." + subGroupName_earnings).style("opacity", 1)
+        })
+        .on("mouseleave", function(event, d) { // When user do not hover anymore
+
+            // Back to normal opacity: 1
+            d3.selectAll(".myRectE")
+                .style("opacity", 1)
+        })
+
+})
+
 // ----------------
-// GRAPH 4 - pie
+// WORK MATCH DONUT
 // ----------------
 
 // set the dimensions and margins of the graph
-const width_G4pie = 450,
-    height_G4pie = 450,
-    margin_G4pie = 40;
+const width_G4donut = 450,
+    height_G4donut = 450,
+    margin_G4donut = 40;
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-const radius = Math.min(width_G4pie, height_G4pie) / 2 - margin_G4pie;
+const radius = Math.min(width_G4donut, height_G4donut) / 2 - margin_G4donut
 
 // append the svg object to the div called 'my_dataviz'
-const svg_G4pie = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width_G4pie)
-    .attr("height", height_G4pie)
-    .append("g")
-    .attr("transform", `translate(${width_G4pie/2}, ${height_G4pie/2})`);
+const svg_G4donut = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width_G4donut)
+    .attr("height", height_G4donut)
+  .append("g")
+    .attr("transform", `translate(${width_G4donut / 2},${height_G4donut / 2})`);
 
 // Create data
 const data = {
@@ -1000,23 +597,494 @@ const color = d3.scaleOrdinal()
 
 // Compute the position of each group on the pie:
 const pie = d3.pie()
-    .value(function(d) {
-        return d[1]
-    })
+  .value(d=>d[1])
+
 const data_ready = pie(Object.entries(data))
 
 // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-svg_G4pie
-    .selectAll('whatever')
-    .data(data_ready)
-    .join('path')
-    .attr('d', d3.arc()
-        .innerRadius(0)
-        .outerRadius(radius)
-    )
-    .attr('fill', function(d) {
-        return (color(d.data[1]))
-    })
-    .attr("stroke", "black")
-    .style("stroke-width", "2px")
-    .style("opacity", 0.7)
+svg_G4donut
+  .selectAll('whatever')
+  .data(data_ready)
+  .join('path')
+  .attr('d', d3.arc()
+    .innerRadius(100)         // This is the size of the donut hole
+    .outerRadius(radius)
+  )
+  .attr('fill', d => color(d.data[0]))
+  .attr("stroke", "black")
+  .style("stroke-width", "2px")
+  .style("opacity", 0.7)
+
+// --------------
+// WORK MATCH PIE
+// --------------
+
+// // set the dimensions and margins of the graph
+// const width_G4pie = 450,
+//     height_G4pie = 450,
+//     margin_G4pie = 40;
+
+// // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+// const radius = Math.min(width_G4pie, height_G4pie) / 2 - margin_G4pie;
+
+// // append the svg object to the div called 'my_dataviz'
+// const svg_G4pie = d3.select("#my_dataviz")
+//     .append("svg")
+//     .attr("width", width_G4pie)
+//     .attr("height", height_G4pie)
+//     .append("g")
+//      .attr("transform", `translate(${width_G4pie/2}, ${height_G4pie/2})`);
+
+// // Create data
+// const data = {
+//     a: 25.85,
+//     b: 74.14
+// }
+
+// // set the color scale
+// const color = d3.scaleOrdinal()
+//     .range(["#004c9b", "#ffdc00"])
+
+// // Compute the position of each group on the pie:
+// const pie = d3.pie()
+// .value(function(d) {
+//      return d[1]
+//  })
+// const data_ready = pie(Object.entries(data))
+
+// // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+// svg_G4pie
+//     .selectAll('whatever')
+//     .data(data_ready)
+//     .join('path')
+//     .attr('d', d3.arc()
+//         .innerRadius(0)
+//         .outerRadius(radius)
+//     )
+//     .attr('fill', function(d) {
+//         return (color(d.data[1]))
+//     })
+//     .attr("stroke", "black")
+//     .style("stroke-width", "2px")
+//     .style("opacity", 0.7)
+
+// ----------------
+// UNUSED
+// ----------------
+
+// // ----------------
+// // GRAPH 3 - TreeMap
+// // ----------------
+
+// // set the dimensions and margins of the graph
+// const margin_G3treemap = {
+//         top: 50,
+//         right: 30,
+//         bottom: 100,
+//         left: 50
+//     },
+
+//     width_G3treemap = 900 - margin_G3treemap.left - margin_G3treemap.right,
+//     height_G3treemap = 600 - margin_G3treemap.top - margin_G3treemap.bottom;
+
+// // append the svg object to the body of the page
+// const svg_G3treemap = d3.select("#Graph3_Treemap")
+//     .append("svg")
+//     .attr("width", width_G3treemap + margin_G3treemap.left + margin_G3treemap.right)
+//     .attr("height", height_G3treemap + margin_G3treemap.top + margin_G3treemap.bottom)
+//     .append("g")
+//     .attr("transform",
+//         `translate(${margin_G3treemap.left}, ${margin_G3treemap.top})`);
+
+// // Read data
+// d3.csv('./data/Experience-Graph3-TreeMap.csv').then(function(data) {
+
+//     // stratify the data: reformatting for d3.js
+//     const root = d3.stratify()
+//         .id(function(d) {
+//             return d.Experience;
+//         }) // Name of the entity (column name is name in csv)
+//         .parentId(function(d) {
+//             return d.parent;
+//         }) // Name of the parent (column name is parent in csv)
+//     (data);
+//     root.sum(function(d) {
+//         return +d.value
+//     }) // Compute the numeric value for each entity
+
+//     // Then d3.treemap computes the position of each element of the hierarchy
+//     // The coordinates are added to the root object above
+//     d3.treemap()
+//         .size([width_G3treemap, height_G3treemap])
+//         .padding(4)
+//         (root);
+
+//     // use this information to add rectangles:
+//     svg_G3treemap
+//         .selectAll("rect")
+//         .data(root.leaves())
+//         .join("rect")
+//         .attr('x', function(d) {
+//             return d.x0;
+//         })
+//         .attr('y', function(d) {
+//             return d.y0;
+//         })
+//         .attr('width', function(d) {
+//             return d.x1 - d.x0;
+//         })
+//         .attr('height', function(d) {
+//             return d.y1 - d.y0;
+//         })
+//         .style("stroke", "black")
+//         // .style("fill", function(d) { return colorScale(d.value)});
+//         // .style("fill", function(d) { return color(d.data.parent)});    
+//         .style("fill", "#0077c8");
+
+//     // d3.scaleOrdinal([`#002d72`, `#0077c8`, `#5bc2f4`])
+
+//     // and to add the text labels
+//     svg_G3treemap
+//         .selectAll("text")
+//         .data(root.leaves())
+//         .join("text")
+//         .attr("x", function(d) {
+//             return d.x0 + 20
+//         }) // +10 to adjust position (more right)
+//         .attr("y", function(d) {
+//             return d.y0 + 40
+//         }) // +20 to adjust position (lower)
+//         .text(function(d) {
+//             return d.data.value
+//         })
+//         .attr("font-size", "20px")
+//         .attr("fill", "white")
+
+//     //     // Adding tooltip for info on hover
+//     // const tooltip = d3.select('svg#canvas')
+//     //                   .append('div')
+//     //                   .attr('id', 'tooltip')
+//     //                   .attr('width', 60 + 'px')
+//     //                   .attr('height', 40 + 'px')
+//     //                   .style('z-index', 10)
+//     //                   .style('display', 'none')
+//     //                   .style('position', 'absolute');
+// })
+
+
+// // ----------------
+// // GRAPH 5
+// // ----------------
+
+// // set the dimensions and margins of the graph
+// const margin_graph5 = {
+//         top: 30,
+//         right: 30,
+//         bottom: 300,
+//         left: 140
+//     },
+//     width_graph5 = 900 - margin_graph5.left - margin_graph5.right,
+//     height_graph5 = 600 - margin_graph5.top - margin_graph5.bottom;
+
+// // append the svg object to the body of the page
+// const svg_graph5 = d3.select("#Graph5")
+//     .append("svg")
+//     .attr("width", width_graph5 + margin_graph5.left + margin_graph5.right)
+//     .attr("height", height_graph5 + margin_graph5.top + margin_graph5.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin_graph5.left},${margin_graph5.top})`);
+
+// // Parse the Data
+// d3.csv("./data/Freq-Graph5.csv").then(function(data) {
+
+//     // X axis
+//     const x = d3.scaleBand()
+//         .range([0, width_graph5])
+//         .domain(data.map(d => d.Parameter))
+//         .padding(0.2);
+//     svg_graph5.append("g")
+//         .attr("transform", `translate(0, ${height_graph5})`)
+//         .call(d3.axisBottom(x))
+//         .selectAll("text")
+//         .attr("transform", "translate(-10,0)rotate(-55)")
+//         .style("font-size", "20px")
+//         .style("text-anchor", "end");
+
+//     // Add Y axis
+//     const y = d3.scaleLinear()
+//         .domain([0, 60])
+//         .range([height_graph5, 0]);
+//     svg_graph5.append("g")
+//         .call(d3.axisLeft(y));
+
+//     var color = d3.scaleOrdinal([`#002d72`, `#0077c8`, `#5bc2f4`]);
+
+//     // Bars
+//     svg_graph5.selectAll("mybar")
+//         .data(data)
+//         .join("rect")
+//         .attr("x", d => x(d.Parameter))
+//         .attr("y", d => y(d.Percent))
+//         .attr("width", x.bandwidth())
+//         .attr("height", d => height_graph5 - y(d.Percent))
+//         .attr("fill", function(d, i) {
+//             return color(i);
+//         })
+//     // .attr("fill", "#0099ff")
+
+// })
+
+// // ----------------
+// // GRAPH 4 - precarity NOT USED
+// // ----------------
+
+// // set the dimensions and margins of graph 2
+// const margin_G4Precarity = {
+//         top: 10,
+//         right: 30,
+//         bottom: 300,
+//         left: 100
+//     },
+//     width_G4Precarity = 900 - margin_G4Precarity.left - margin_G4Precarity.right,
+//     height_G4Precarity = 600 - margin_G4Precarity.top - margin_G4Precarity.bottom;
+
+// // append the svg object to the body of the page
+// const svg_G4Precarity = d3.select("#Graph4_Precarity")
+//     .append("svg")
+//     .attr("width", width_G4Precarity + margin_G4Precarity.left + margin_G4Precarity.right)
+//     .attr("height", height_G4Precarity + margin_G4Precarity.top + margin_G4Precarity.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin_G4Precarity.left},${margin_G4Precarity.top})`);
+
+// // Parse the Data
+// d3.csv("./data/Precarity-Graph4.csv").then(function(data) {
+
+//     // List of subgroups = header of the csv files = soil condition here
+//     const subgroups_precarity = data.columns.slice(1)
+
+//     // List of groups = species here = value of the first column called group -> I show them on the X axis
+//     const groups_precarity = data.map(d => d.G1)
+
+//     // Add X axis
+//     const x = d3.scaleBand()
+//         .domain(groups_precarity)
+//         .range([0, width_G4Precarity])
+//         .padding([0.2])
+//     svg_G4Precarity.append("g")
+//         .attr("transform", `translate(0, ${height_G4Precarity})`)
+//         .call(d3.axisBottom(x).tickSizeOuter(0))
+//         .selectAll("text")
+//         .attr("transform", "translate(-10,0)rotate(-55)")
+//         .style("text-anchor", "end");
+
+//     // Add Y axis
+//     const y = d3.scaleLinear()
+//         .domain([0, 100])
+//         .range([height_G4Precarity, 0]);
+//     svg_G4Precarity.append("g")
+//         .call(d3.axisLeft(y));
+
+//     // color palette = one color per subgroup
+//     const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+
+//     //stack the data? --> stack per subgroup
+//     const stackedData = d3.stack()
+//         .keys(subgroups_precarity)
+//         (data)
+
+//     // Highlight a specific subgroup when hovered
+//     // Show the bars
+//     svg_G4Precarity.append("g")
+//         .selectAll("g")
+//         // Enter in the stack data = loop key per key = group per group
+//         .data(stackedData)
+//         .join("g")
+//         .attr("fill", d => color(d.key))
+//         .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
+//         .selectAll("rect")
+//         // enter a second time = loop subgroup per subgroup to add all rectangles
+//         .data(d => d)
+//         .join("rect")
+//         .attr("x", d => x(d.data.G1))
+//         .attr("y", d => y(d[1]))
+//         .attr("height", d => y(d[0]) - y(d[1]))
+//         .attr("width", x.bandwidth())
+//         .attr("stroke", "grey")
+//         .on("mouseover", function(event, d) { // What happens when user hover a bar
+
+//             // what subgroup are we hovering?
+//             const subGroupName_precarity = d3.select(this.parentNode).datum().key
+
+//             // Reduce opacity of all rect to 0.2
+//             d3.selectAll(".myRect").style("opacity", 0.2)
+
+//             // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+//             d3.selectAll("." + subGroupName_precarity).style("opacity", 1)
+//         })
+//         .on("mouseleave", function(event, d) { // When user do not hover anymore
+
+//             // Back to normal opacity: 1
+//             d3.selectAll(".myRect")
+//                 .style("opacity", 1)
+//         })
+
+// })
+
+
+// // ----------------
+// // GRAPH 3
+// // ----------------
+
+// // set the dimensions and margins of the graph
+// const margin_graph3 = {
+//         top: 30,
+//         right: 30,
+//         bottom: 500,
+//         left: 140
+//     },
+//     width_graph3 = 900 - margin_graph3.left - margin_graph3.right,
+//     height_graph3 = 800 - margin_graph3.top - margin_graph3.bottom;
+
+// // append the svg object to the body of the page
+// const svg_graph3 = d3.select("#Graph3")
+//     .append("svg")
+//     .attr("width", width_graph3 + margin_graph3.left + margin_graph3.right)
+//     .attr("height", height_graph3 + margin_graph3.top + margin_graph3.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin_graph3.left},${margin_graph3.top})`);
+
+// // Parse the Data
+// d3.csv("./data/Experience-Graph3.csv").then(function(data) {
+
+//     // X axis
+//     const x = d3.scaleBand()
+//         .range([0, width_graph3])
+//         .domain(data.map(d => d.Experience))
+//         .padding(0.2);
+//     svg_graph3.append("g")
+//         .attr("transform", `translate(0, ${height_graph3})`)
+//         .call(d3.axisBottom(x))
+//         .selectAll("text")
+//         .attr("transform", "translate(-10,0)rotate(-55)")
+//         .style("font-size", "20px")
+//         .style("text-anchor", "end");
+
+//     // Add Y axis
+//     const y = d3.scaleLinear()
+//         .domain([0, 180])
+//         .range([height_graph3, 0]);
+//     svg_graph3.append("g")
+//         .call(d3.axisLeft(y));
+
+//     // Bars
+//     svg_graph3.selectAll("mybar")
+//         .data(data)
+//         .join("rect")
+//         .attr("x", d => x(d.Experience))
+//         .attr("y", d => y(d.value))
+//         .attr("width", x.bandwidth())
+//         .attr("height", d => height_graph3 - y(d.value))
+//         .attr("fill", "#ffdc00")
+
+// })
+
+
+// // ----------------
+// // GRAPH 4 - JobMatch
+// // ----------------
+
+// // set the dimensions and margins of the graph
+// const margin_G4jobmatch = {
+//         top: 10,
+//         right: 30,
+//         bottom: 200,
+//         left: 100
+//     },
+//     width_G4jobmatch = 900 - margin_G4jobmatch.left - margin_G4jobmatch.right,
+//     height_G4jobmatch = 500 - margin_G4jobmatch.top - margin_G4jobmatch.bottom;
+
+// // append the svg object to the body of the page
+// const svg_G4jobmatch = d3.select("#Graph4_JobMatch")
+//     .append("svg")
+//     .attr("width", width_G4jobmatch + margin_G4jobmatch.left + margin_G4jobmatch.right)
+//     .attr("height", height_G4jobmatch + margin_G4jobmatch.top + margin_G4jobmatch.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin_G4jobmatch.left},${margin_G4jobmatch.top})`);
+
+// // Parse the Data
+// d3.csv("./data/JobMatch-Graph4.csv").then(function(data) {
+
+//     // List of subgroups = header of the csv files = soil condition here
+//     const subgroups_jobmatch = data.columns.slice(1)
+
+//     // List of groups = species here = value of the first column called group -> I show them on the X axis
+//     const groups_jobmatch = data.map(d => d.G2)
+
+//     // Add X axis
+//     const x = d3.scaleBand()
+//         .domain(groups_jobmatch)
+//         .range([0, width_G4jobmatch])
+//         .padding([0.2])
+//     svg_G4jobmatch.append("g")
+//         .attr("transform", `translate(0, ${height_G4jobmatch})`)
+//         .call(d3.axisBottom(x).tickSizeOuter(0))
+//         .selectAll("text")
+//         .attr("transform", "translate(-10,0)rotate(-55)")
+//         .style("font-size", "20px")
+//         .style("text-anchor", "end");
+
+//     // Add Y axis
+//     const y = d3.scaleLinear()
+//         .domain([0, 100])
+//         .range([height_G4jobmatch, 0]);
+//     svg_G4jobmatch.append("g")
+//         .call(d3.axisLeft(y));
+
+//     // color palette = one color per subgroup
+//     const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+
+//     //stack the data? --> stack per subgroup
+//     const stackedData = d3.stack()
+//         .keys(subgroups_jobmatch)
+//         (data)
+
+//     // ----------------
+//     // Highlight a specific subgroup when hovered
+//     // ----------------
+
+//     // Show the bars
+//     svg_G4jobmatch.append("g")
+//         .selectAll("g")
+//         // Enter in the stack data = loop key per key = group per group
+//         .data(stackedData)
+//         .join("g")
+//         .attr("fill", d => color(d.key))
+//         .attr("class", d => "myRectJ " + d.key) // Add a class to each subgroup: their name
+//         .selectAll("rect")
+//         // enter a second time = loop subgroup per subgroup to add all rectangles
+//         .data(d => d)
+//         .join("rect")
+//         .attr("x", d => x(d.data.G2))
+//         .attr("y", d => y(d[1]))
+//         .attr("height", d => y(d[0]) - y(d[1]))
+//         .attr("width", x.bandwidth())
+//         .attr("stroke", "grey")
+//         .on("mouseover", function(event, d) { // What happens when user hover a bar
+
+//             // what subgroup are we hovering?
+//             const subGroupName_jobmatch = d3.select(this.parentNode).datum().key
+
+//             // Reduce opacity of all rect to 0.2
+//             d3.selectAll(".myRectJ").style("opacity", 0.2)
+
+//             // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+//             d3.selectAll("." + subGroupName_jobmatch).style("opacity", 1)
+//         })
+//         .on("mouseleave", function(event, d) { // When user do not hover anymore
+
+//             // Back to normal opacity: 1
+//             d3.selectAll(".myRectJ")
+//                 .style("opacity", 1)
+//         })
+
+// })
