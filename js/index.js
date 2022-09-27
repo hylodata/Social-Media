@@ -286,9 +286,9 @@ d3.csv("./data/bubble.csv").then(function(data) {
         .style("border-width", "2px")
         .style("border-radius", "5px")
         .style("padding", "5px")
-          .style("text-align", "center")
-	  .style("max-width", "40rem")
-	  .style("margin", "1rem auto 2rem auto")
+        .style("text-align", "center")
+        .style("max-width", "40rem")
+        .style("margin", "1rem auto 2rem auto")
     // .style("width", "500px")
     // .style("height", "200px")
 
@@ -371,40 +371,40 @@ d3.csv("./data/bubble.csv").then(function(data) {
 // EMPLOYMENT OUTCOMES  
 // -------------------
 
-// set the dimensions and margins of graph 2
-const margin_G4Employment = {
+// set the dimensions and margins of the graph
+var margin_employment = {
         top: 10,
         right: 30,
         bottom: 200,
         left: 100
     },
-    width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
-    height_G4Employment = 500 - margin_G4Employment.top - margin_G4Employment.bottom;
+    width_employment = 900 - margin_employment.left - margin_employment.right,
+    height_employment = 500 - margin_employment.top - margin_employment.bottom;
 
-// append the svg object to the body of the page
-const svg_G4Employment = d3.select("#Graph4_Employment")
+// append the svgEarnings object to the body of the page
+var svgEmployment = d3.select("#EmploymentTooltip")
     .append("svg")
-    .attr("width", width_G4Employment + margin_G4Employment.left + margin_G4Employment.right)
-    .attr("height", height_G4Employment + margin_G4Employment.top + margin_G4Employment.bottom)
+    .attr("width", width_employment + margin_employment.left + margin_employment.right)
+    .attr("height", height_employment + margin_employment.top + margin_employment.bottom)
     .append("g")
-    .attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
+    .attr("transform", `translate(${margin_employment.left},${margin_employment.top})`);
 
 // Parse the Data
-d3.csv("./data/Employment-Graph4.csv").then(function(data) {
+d3.csv("../data/Employment-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
-    const subgroups_Employment = data.columns.slice(1)
+    var subgroupsEmployment = data.columns.slice(1)
 
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups_Employment = data.map(d => d.G)
+    // List of groupsEarnings = species here = value of the first column called group -> I show them on the X axis
+    var groupsEmployment = data.map(d => d.G)
 
     // Add X axis
-    const x = d3.scaleBand()
-        .domain(groups_Employment)
-        .range([0, width_G4Employment])
+    var x = d3.scaleBand()
+        .domain(groupsEmployment)
+        .range([0, width_employment])
         .padding([0.2])
-    svg_G4Employment.append("g")
-        .attr("transform", `translate(0, ${height_G4Employment})`)
+    svgEmployment.append("g")
+        .attr("transform", `translate(0, ${height_employment})`)
         .call(d3.axisBottom(x).tickSizeOuter(0))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-55)")
@@ -412,29 +412,65 @@ d3.csv("./data/Employment-Graph4.csv").then(function(data) {
         .style("text-anchor", "end");
 
     // Add Y axis
-    const y = d3.scaleLinear()
+    var y = d3.scaleLinear()
         .domain([0, 100])
-        .range([height_G4Employment, 0]);
-    svg_G4Employment.append("g")
+        .range([height_employment, 0]);
+    svgEmployment.append("g")
         .call(d3.axisLeft(y));
 
     // color palette = one color per subgroup
-    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+    var color = d3.scaleOrdinal()
+        .domain(subgroupsEmployment)
+        .range(['#004c9b', '#ffdc00'])
 
     //stack the data? --> stack per subgroup
-    const stackedData = d3.stack()
-        .keys(subgroups_Employment)
+    var stackedData = d3.stack()
+        .keys(subgroupsEmployment)
         (data)
 
-    // Highlight a specific subgroup when hovered
+    // ----------------
+    // Create a tooltip
+    // ----------------
+    var tooltip = d3.select("#EmploymentTooltip")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        // .style("position", "absolute")
+        .style("background-color", "#cce5ff")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+        .style("text-align", "center")
+        .style("max-width", "40rem")
+        .style("margin", "1rem auto 2rem auto")
+
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(event, d) {
+        var subgroupNameEmployment = d3.select(this.parentNode).datum().key;
+        var subgroupValueEmployment = d.data[subgroupNameEmployment];
+        tooltip
+            .html(subgroupValueEmployment + " " + subgroupNameEmployment)
+            .style("opacity", 1)
+
+    }
+    var mousemove = function(event, d) {
+        tooltip.style("transform", "translateY(-90%)")
+            .style("left", (event.x) / 2 + "px")
+            .style("top", (event.y) / 2 - 30 + "px")
+    }
+    var mouseleave = function(event, d) {
+        tooltip
+            .style("opacity", 0)
+    }
+
     // Show the bars
-    svg_G4Employment.append("g")
+    svgEmployment.append("g")
         .selectAll("g")
         // Enter in the stack data = loop key per key = group per group
         .data(stackedData)
         .join("g")
         .attr("fill", d => color(d.key))
-        .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
         .selectAll("rect")
         // enter a second time = loop subgroup per subgroup to add all rectangles
         .data(d => d)
@@ -444,98 +480,116 @@ d3.csv("./data/Employment-Graph4.csv").then(function(data) {
         .attr("height", d => y(d[0]) - y(d[1]))
         .attr("width", x.bandwidth())
         .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
-
-            // what subgroup are we hovering?
-            const subGroupName_Employment = d3.select(this.parentNode).datum().key
-
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRect").style("opacity", 0.2)
-
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
-
-            // Back to normal opacity: 1
-            d3.selectAll(".myRect")
-                .style("opacity", 1)
-        })
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
 
 })
 
-// --------
-// EARNINGS
-// --------
+//---------------------
+//----EarningsGraph4---
+//---------------------
 
 // set the dimensions and margins of the graph
-const margin_G4earnings = {
+var margin_earnings = {
         top: 10,
         right: 30,
         bottom: 250,
         left: 100
     },
-    width_G4earnings = 900 - margin_G4earnings.left - margin_G4earnings.right,
-    height_G4earnings = 550 - margin_G4earnings.top - margin_G4earnings.bottom;
+    width_earnings = 900 - margin_earnings.left - margin_earnings.right,
+    height_earnings = 550 - margin_earnings.top - margin_earnings.bottom;
 
-// append the svg object to the body of the page
-const svg_G4earnings = d3.select("#Graph4_Earnings")
+// append the svgEarnings object to the body of the page
+var svgEarnings = d3.select("#EarningsTooltip")
     .append("svg")
-    .attr("width", width_G4earnings + margin_G4earnings.left + margin_G4earnings.right)
-    .attr("height", height_G4earnings + margin_G4earnings.top + margin_G4earnings.bottom)
+    .attr("width", width_earnings + margin_earnings.left + margin_earnings.right)
+    .attr("height", height_earnings + margin_earnings.top + margin_earnings.bottom)
     .append("g")
-    .attr("transform", `translate(${margin_G4earnings.left},${margin_G4earnings.top})`);
+    .attr("transform", `translate(${margin_earnings.left},${margin_earnings.top})`);
 
 // Parse the Data
-d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
+d3.csv("../data/Earnings-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
-    const subgroups_earnings = data.columns.slice(1)
+    var subgroupsEarnings = data.columns.slice(1)
 
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups_earnings = data.map(d => d.G3)
+    // List of groupsEarnings = species here = value of the first column called group -> I show them on the X axis
+    var groupsEarnings = data.map(d => d.G3)
 
     // Add X axis
-    const x = d3.scaleBand()
-        .domain(groups_earnings)
-        .range([0, width_G4earnings])
+    var x = d3.scaleBand()
+        .domain(groupsEarnings)
+        .range([0, width_earnings])
         .padding([0.2])
-    svg_G4earnings.append("g")
-        .attr("transform", `translate(0, ${height_G4earnings})`)
+    svgEarnings.append("g")
+        .attr("transform", `translate(0, ${height_earnings})`)
         .call(d3.axisBottom(x).tickSizeOuter(0))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-55)")
         .style("font-size", "20px")
-        .style("text-anchor", "end");
+        .style("text-anchor", "end");    
 
     // Add Y axis
-    const y = d3.scaleLinear()
+    var y = d3.scaleLinear()
         .domain([0, 100])
-        .range([height_G4earnings, 0]);
-    svg_G4earnings.append("g")
+        .range([height_earnings, 0]);
+    svgEarnings.append("g")
         .call(d3.axisLeft(y));
 
     // color palette = one color per subgroup
-    const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+    var color = d3.scaleOrdinal()
+        .domain(subgroupsEarnings)
+        .range([`#004c9b`, `#ffdc00`])
 
     //stack the data? --> stack per subgroup
-    const stackedData = d3.stack()
-        .keys(subgroups_earnings)
+    var stackedData = d3.stack()
+        .keys(subgroupsEarnings)
         (data)
 
+    // ----------------
+    // Create a tooltip
+    // ----------------
+    var tooltip_earnings = d3.select("#EarningsTooltip")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        // .style("position", "absolute")
+        .style("background-color", "#cce5ff")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+        .style("text-align", "center")
+        .style("max-width", "40rem")
+        .style("margin", "1rem auto 2rem auto")
 
-    // ----------------
-    // Highlight a specific subgroup when hovered
-    // ----------------
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(event, d) {
+        var subgroupName_earnings = d3.select(this.parentNode).datum().key;
+        var subgroupValue_earnings = d.data[subgroupName_earnings];
+        tooltip_earnings
+            .html(subgroupValue_earnings + "" + subgroupName_earnings)
+            .style("opacity", 1)
+
+    }
+    var mousemove = function(event, d) {
+        tooltip_earnings.style("transform", "translateY(-90%)")
+            .style("left", (event.x) / 2 + "px")
+            .style("top", (event.y) / 2 - 30 + "px")
+    }
+    var mouseleave = function(event, d) {
+        tooltip_earnings
+            .style("opacity", 0)
+    }
 
     // Show the bars
-    svg_G4earnings.append("g")
+    svgEarnings.append("g")
         .selectAll("g")
         // Enter in the stack data = loop key per key = group per group
         .data(stackedData)
         .join("g")
         .attr("fill", d => color(d.key))
-        .attr("class", d => "myRectE " + d.key) // Add a class to each subgroup: their name
         .selectAll("rect")
         // enter a second time = loop subgroup per subgroup to add all rectangles
         .data(d => d)
@@ -545,23 +599,9 @@ d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
         .attr("height", d => y(d[0]) - y(d[1]))
         .attr("width", x.bandwidth())
         .attr("stroke", "grey")
-        .on("mouseover", function(event, d) { // What happens when user hover a bar
-
-            // what subgroup are we hovering?
-            const subGroupName_earnings = d3.select(this.parentNode).datum().key
-
-            // Reduce opacity of all rect to 0.2
-            d3.selectAll(".myRectE").style("opacity", 0.2)
-
-            // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
-            d3.selectAll("." + subGroupName_earnings).style("opacity", 1)
-        })
-        .on("mouseleave", function(event, d) { // When user do not hover anymore
-
-            // Back to normal opacity: 1
-            d3.selectAll(".myRectE")
-                .style("opacity", 1)
-        })
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
 
 })
 
@@ -579,10 +619,10 @@ const radius = Math.min(width_G4donut, height_G4donut) / 2 - margin_G4donut
 
 // append the svg object to the div called 'my_dataviz'
 const svg_G4donut = d3.select("#my_dataviz")
-  .append("svg")
+    .append("svg")
     .attr("width", width_G4donut)
     .attr("height", height_G4donut)
-  .append("g")
+    .append("g")
     .attr("transform", `translate(${width_G4donut / 2},${height_G4donut / 2})`);
 
 // Create data
@@ -597,23 +637,23 @@ const color = d3.scaleOrdinal()
 
 // Compute the position of each group on the pie:
 const pie = d3.pie()
-  .value(d=>d[1])
+    .value(d => d[1])
 
 const data_ready = pie(Object.entries(data))
 
 // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
 svg_G4donut
-  .selectAll('whatever')
-  .data(data_ready)
-  .join('path')
-  .attr('d', d3.arc()
-    .innerRadius(100)         // This is the size of the donut hole
-    .outerRadius(radius)
-  )
-  .attr('fill', d => color(d.data[0]))
-  .attr("stroke", "black")
-  .style("stroke-width", "2px")
-  .style("opacity", 0.7)
+    .selectAll('whatever')
+    .data(data_ready)
+    .join('path')
+    .attr('d', d3.arc()
+        .innerRadius(100) // This is the size of the donut hole
+        .outerRadius(radius)
+    )
+    .attr('fill', d => color(d.data[0]))
+    .attr("stroke", "black")
+    .style("stroke-width", "2px")
+    .style("opacity", 0.7)
 
 // --------------
 // WORK MATCH PIE
@@ -1084,6 +1124,204 @@ svg_G4donut
 
 //             // Back to normal opacity: 1
 //             d3.selectAll(".myRectJ")
+//                 .style("opacity", 1)
+//         })
+
+// })
+
+// // --------
+// // EARNINGS
+// // --------
+
+// // set the dimensions and margins of the graph
+// const margin_G4earnings = {
+//         top: 10,
+//         right: 30,
+//         bottom: 250,
+//         left: 100
+//     },
+//     width_G4earnings = 900 - margin_G4earnings.left - margin_G4earnings.right,
+//     height_G4earnings = 550 - margin_G4earnings.top - margin_G4earnings.bottom;
+
+// // append the svg object to the body of the page
+// const svg_G4earnings = d3.select("#Graph4_Earnings")
+//     .append("svg")
+//     .attr("width", width_G4earnings + margin_G4earnings.left + margin_G4earnings.right)
+//     .attr("height", height_G4earnings + margin_G4earnings.top + margin_G4earnings.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin_G4earnings.left},${margin_G4earnings.top})`);
+
+// // Parse the Data
+// d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
+
+//     // List of subgroups = header of the csv files = soil condition here
+//     const subgroups_earnings = data.columns.slice(1)
+
+//     // List of groups = species here = value of the first column called group -> I show them on the X axis
+//     const groups_earnings = data.map(d => d.G3)
+
+//     // Add X axis
+//     const x = d3.scaleBand()
+//         .domain(groups_earnings)
+//         .range([0, width_G4earnings])
+//         .padding([0.2])
+//     svg_G4earnings.append("g")
+//         .attr("transform", `translate(0, ${height_G4earnings})`)
+//         .call(d3.axisBottom(x).tickSizeOuter(0))
+//         .selectAll("text")
+//         .attr("transform", "translate(-10,0)rotate(-55)")
+//         .style("font-size", "20px")
+//         .style("text-anchor", "end");
+
+//     // Add Y axis
+//     const y = d3.scaleLinear()
+//         .domain([0, 100])
+//         .range([height_G4earnings, 0]);
+//     svg_G4earnings.append("g")
+//         .call(d3.axisLeft(y));
+
+//     // color palette = one color per subgroup
+//     const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+
+//     //stack the data? --> stack per subgroup
+//     const stackedData = d3.stack()
+//         .keys(subgroups_earnings)
+//         (data)
+
+
+//     // ----------------
+//     // Highlight a specific subgroup when hovered
+//     // ----------------
+
+//     // Show the bars
+//     svg_G4earnings.append("g")
+//         .selectAll("g")
+//         // Enter in the stack data = loop key per key = group per group
+//         .data(stackedData)
+//         .join("g")
+//         .attr("fill", d => color(d.key))
+//         .attr("class", d => "myRectE " + d.key) // Add a class to each subgroup: their name
+//         .selectAll("rect")
+//         // enter a second time = loop subgroup per subgroup to add all rectangles
+//         .data(d => d)
+//         .join("rect")
+//         .attr("x", d => x(d.data.G3))
+//         .attr("y", d => y(d[1]))
+//         .attr("height", d => y(d[0]) - y(d[1]))
+//         .attr("width", x.bandwidth())
+//         .attr("stroke", "grey")
+//         .on("mouseover", function(event, d) { // What happens when user hover a bar
+
+//             // what subgroup are we hovering?
+//             const subGroupName_earnings = d3.select(this.parentNode).datum().key
+
+//             // Reduce opacity of all rect to 0.2
+//             d3.selectAll(".myRectE").style("opacity", 0.2)
+
+//             // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+//             d3.selectAll("." + subGroupName_earnings).style("opacity", 1)
+//         })
+//         .on("mouseleave", function(event, d) { // When user do not hover anymore
+
+//             // Back to normal opacity: 1
+//             d3.selectAll(".myRectE")
+//                 .style("opacity", 1)
+//         })
+
+// })
+
+// // ----------
+// // EMPLOYMENT
+// // ----------
+
+// // set the dimensions and margins of graph 2
+// const margin_G4Employment = {
+//         top: 10,
+//         right: 30,
+//         bottom: 200,
+//         left: 100
+//     },
+//     width_G4Employment = 900 - margin_G4Employment.left - margin_G4Employment.right,
+//     height_G4Employment = 500 - margin_G4Employment.top - margin_G4Employment.bottom;
+
+// // append the svg object to the body of the page
+// const svg_G4Employment = d3.select("#Graph4_Employment")
+//     .append("svg")
+//     .attr("width", width_G4Employment + margin_G4Employment.left + margin_G4Employment.right)
+//     .attr("height", height_G4Employment + margin_G4Employment.top + margin_G4Employment.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin_G4Employment.left},${margin_G4Employment.top})`);
+
+// // Parse the Data
+// d3.csv("./data/Employment-Graph4.csv").then(function(data) {
+
+//     // List of subgroups = header of the csv files = soil condition here
+//     const subgroups_Employment = data.columns.slice(1)
+
+//     // List of groups = species here = value of the first column called group -> I show them on the X axis
+//     const groups_Employment = data.map(d => d.G)
+
+//     // Add X axis
+//     const x = d3.scaleBand()
+//         .domain(groups_Employment)
+//         .range([0, width_G4Employment])
+//         .padding([0.2])
+//     svg_G4Employment.append("g")
+//         .attr("transform", `translate(0, ${height_G4Employment})`)
+//         .call(d3.axisBottom(x).tickSizeOuter(0))
+//         .selectAll("text")
+//         .attr("transform", "translate(-10,0)rotate(-55)")
+//         .style("font-size", "20px")
+//         .style("text-anchor", "end");
+
+//     // Add Y axis
+//     const y = d3.scaleLinear()
+//         .domain([0, 100])
+//         .range([height_G4Employment, 0]);
+//     svg_G4Employment.append("g")
+//         .call(d3.axisLeft(y));
+
+//     // color palette = one color per subgroup
+//     const color = d3.scaleOrdinal([`#004c9b`, `#ffdc00`])
+
+//     //stack the data? --> stack per subgroup
+//     const stackedData = d3.stack()
+//         .keys(subgroups_Employment)
+//         (data)
+
+//     // Highlight a specific subgroup when hovered
+//     // Show the bars
+//     svg_G4Employment.append("g")
+//         .selectAll("g")
+//         // Enter in the stack data = loop key per key = group per group
+//         .data(stackedData)
+//         .join("g")
+//         .attr("fill", d => color(d.key))
+//         .attr("class", d => "myRect " + d.key) // Add a class to each subgroup: their name
+//         .selectAll("rect")
+//         // enter a second time = loop subgroup per subgroup to add all rectangles
+//         .data(d => d)
+//         .join("rect")
+//         .attr("x", d => x(d.data.G))
+//         .attr("y", d => y(d[1]))
+//         .attr("height", d => y(d[0]) - y(d[1]))
+//         .attr("width", x.bandwidth())
+//         .attr("stroke", "grey")
+//         .on("mouseover", function(event, d) { // What happens when user hover a bar
+
+//             // what subgroup are we hovering?
+//             const subGroupName_Employment = d3.select(this.parentNode).datum().key
+
+//             // Reduce opacity of all rect to 0.2
+//             d3.selectAll(".myRect").style("opacity", 0.2)
+
+//             // Highlight all rects of this subgroup with opacity 1. It is possible to select them since they have a specific class = their name.
+//             d3.selectAll("." + subGroupName_Employment).style("opacity", 1)
+//         })
+//         .on("mouseleave", function(event, d) { // When user do not hover anymore
+
+//             // Back to normal opacity: 1
+//             d3.selectAll(".myRect")
 //                 .style("opacity", 1)
 //         })
 
