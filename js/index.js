@@ -390,7 +390,7 @@ var svgEmployment = d3.select("#EmploymentTooltip")
     .attr("transform", `translate(${margin_employment.left},${margin_employment.top})`);
 
 // Parse the Data
-d3.csv("../data/Employment-Graph4.csv").then(function(data) {
+d3.csv("./data/Employment-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
     var subgroupsEmployment = data.columns.slice(1)
@@ -509,7 +509,7 @@ var svgEarnings = d3.select("#EarningsTooltip")
     .attr("transform", `translate(${margin_earnings.left},${margin_earnings.top})`);
 
 // Parse the Data
-d3.csv("../data/Earnings-Graph4.csv").then(function(data) {
+d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
 
     // List of subgroups = header of the csv files = soil condition here
     var subgroupsEarnings = data.columns.slice(1)
