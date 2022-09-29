@@ -609,71 +609,21 @@ d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
 // WORK MATCH DONUT
 // ----------------
 
-// // set the dimensions and margins of the graph
-// const width_G4donut = 450,
-//     height_G4donut = 450,
-//     margin_G4donut = 40;
-
-// // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-// const radius = Math.min(width_G4donut, height_G4donut) / 2 - margin_G4donut
-
-// // append the svg object to the div called 'donut'
-// const svg_G4donut = d3.select("#donut")
-//     .append("svg")
-//     .attr("width", width_G4donut)
-//     .attr("height", height_G4donut)
-//     .append("g")
-//     .attr("transform", `translate(${width_G4donut / 2},${height_G4donut / 2})`);
-
-// // Create data
-// const data = {
-//     a: 25.85,
-//     b: 74.14
-// }
-
-// // set the color scale
-// const color = d3.scaleOrdinal()
-//     .range(["#004c9b", "#ffdc00"])
-
-// // Compute the position of each group on the pie:
-// const pie = d3.pie()
-//     .value(d => d[1])
-
-// const data_ready = pie(Object.entries(data))
-
-// // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-// svg_G4donut
-//     .selectAll('whatever')
-//     .data(data_ready)
-//     .join('path')
-//     .attr('d', d3.arc()
-//         .innerRadius(100) // This is the size of the donut hole
-//         .outerRadius(radius)
-//     )
-//     .attr('fill', d => color(d.data[0]))
-//     .attr("stroke", "black")
-//     .style("stroke-width", "2px")
-//     .style("opacity", 0.7)
-
-// --------------
-// WORK MATCH PIE
-// --------------
-
 // set the dimensions and margins of the graph
-const width_G4pie = 450,
-    height_G4pie = 450,
-    margin_G4pie = 40;
+const width_G4donut = 450,
+    height_G4donut = 450,
+    margin_G4donut = 40;
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-const radius = Math.min(width_G4pie, height_G4pie) / 2 - margin_G4pie;
+const radius = Math.min(width_G4donut, height_G4donut) / 2 - margin_G4donut
 
-// append the svg object to the div called 'pie'
-const svg_G4pie = d3.select("#pie")
+// append the svg object to the div called 'donut'
+const svg_G4donut = d3.select("#donut")
     .append("svg")
-    .attr("width", width_G4pie)
-    .attr("height", height_G4pie)
+    .attr("width", width_G4donut)
+    .attr("height", height_G4donut)
     .append("g")
-     .attr("transform", `translate(${width_G4pie/2}, ${height_G4pie/2})`);
+    .attr("transform", `translate(${width_G4donut / 2},${height_G4donut / 2})`);
 
 // Create data
 const data = {
@@ -687,26 +637,76 @@ const color = d3.scaleOrdinal()
 
 // Compute the position of each group on the pie:
 const pie = d3.pie()
-.value(function(d) {
-     return d[1]
- })
+    .value(d => d[1])
+
 const data_ready = pie(Object.entries(data))
 
 // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-svg_G4pie
+svg_G4donut
     .selectAll('whatever')
     .data(data_ready)
     .join('path')
     .attr('d', d3.arc()
-        .innerRadius(0)
+        .innerRadius(100) // This is the size of the donut hole
         .outerRadius(radius)
     )
-    .attr('fill', function(d) {
-        return (color(d.data[1]))
-    })
+    .attr('fill', d => color(d.data[0]))
     .attr("stroke", "black")
     .style("stroke-width", "2px")
     .style("opacity", 0.7)
+
+// --------------
+// WORK MATCH PIE
+// --------------
+
+// // set the dimensions and margins of the graph
+// const width_G4pie = 450,
+//     height_G4pie = 450,
+//     margin_G4pie = 40;
+
+// // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+// const radius = Math.min(width_G4pie, height_G4pie) / 2 - margin_G4pie;
+
+// // append the svg object to the div called 'pie'
+// const svg_G4pie = d3.select("#pie")
+//     .append("svg")
+//     .attr("width", width_G4pie)
+//     .attr("height", height_G4pie)
+//     .append("g")
+//      .attr("transform", `translate(${width_G4pie/2}, ${height_G4pie/2})`);
+
+// // Create data
+// const data = {
+//     a: 25.85,
+//     b: 74.14
+// }
+
+// // set the color scale
+// const color = d3.scaleOrdinal()
+//     .range(["#004c9b", "#ffdc00"])
+
+// // Compute the position of each group on the pie:
+// const pie = d3.pie()
+// .value(function(d) {
+//      return d[1]
+//  })
+// const data_ready = pie(Object.entries(data))
+
+// // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+// svg_G4pie
+//     .selectAll('whatever')
+//     .data(data_ready)
+//     .join('path')
+//     .attr('d', d3.arc()
+//         .innerRadius(0)
+//         .outerRadius(radius)
+//     )
+//     .attr('fill', function(d) {
+//         return (color(d.data[1]))
+//     })
+//     .attr("stroke", "black")
+//     .style("stroke-width", "2px")
+//     .style("opacity", 0.7)
 
 // ----------------
 // UNUSED
