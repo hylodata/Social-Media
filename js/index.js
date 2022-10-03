@@ -287,7 +287,7 @@ d3.csv("./data/bubble.csv").then(function(data) {
         .style("padding", "5px")
         .style("position", "relative")
         .style("max-width", "30rem")
-//        .style("margin", "1rem auto 2rem auto")
+    //        .style("margin", "1rem auto 2rem auto")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function(event, d) {
@@ -438,14 +438,14 @@ d3.csv("./data/Employment-Graph4.csv").then(function(data) {
         .style("border-radius", "5px")
         .style("padding", "5px")
         .style("position", "relative")
-        .style("max-width", "30rem")
+        .style("max-width", "15rem")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(event, d) {
         var subgroupNameEmployment = d3.select(this.parentNode).datum().key;
         var subgroupValueEmployment = d.data[subgroupNameEmployment];
         tooltip
-            .html(subgroupValueEmployment + " " + subgroupNameEmployment)
+            .html(subgroupValueEmployment + "" + subgroupNameEmployment)
             .style("opacity", 1)
 
     }
@@ -555,7 +555,7 @@ d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
         .style("border-radius", "5px")
         .style("padding", "5px")
         .style("position", "relative")
-        .style("max-width", "30rem")
+        .style("max-width", "15rem")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(event, d) {
