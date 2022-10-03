@@ -280,17 +280,14 @@ d3.csv("./data/bubble.csv").then(function(data) {
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        // .style("position", "absolute")
-        .style("background-color", "#cce5ff")
+        .style("background-color", "white")
         .style("border", "solid")
         .style("border-width", "2px")
         .style("border-radius", "5px")
         .style("padding", "5px")
-        .style("text-align", "center")
-        .style("max-width", "40rem")
-        .style("margin", "1rem auto 2rem auto")
-    // .style("width", "500px")
-    // .style("height", "200px")
+        .style("position", "relative")
+        .style("max-width", "30rem")
+//        .style("margin", "1rem auto 2rem auto")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function(event, d) {
@@ -300,8 +297,8 @@ d3.csv("./data/bubble.csv").then(function(data) {
     const mousemove = function(event, d) {
         Tooltip
             .html(d.value + " people" + d.key)
-            .style("left", (event.x / 2 + 20) + "px")
-            .style("top", (event.y / 2 - 30) + "px")
+            .style("left", (event.x / 1 + 10) + "px")
+            .style("top", (event.y / 2 - 500) + "px")
     }
     var mouseleave = function(event, d) {
         Tooltip
@@ -435,15 +432,13 @@ d3.csv("./data/Employment-Graph4.csv").then(function(data) {
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        // .style("position", "absolute")
-        .style("background-color", "#fff8cc")
+        .style("background-color", "white")
         .style("border", "solid")
         .style("border-width", "2px")
         .style("border-radius", "5px")
         .style("padding", "5px")
-        .style("text-align", "center")
-        .style("max-width", "40rem")
-        .style("margin", "1rem auto 2rem auto")
+        .style("position", "relative")
+        .style("max-width", "30rem")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(event, d) {
@@ -456,8 +451,8 @@ d3.csv("./data/Employment-Graph4.csv").then(function(data) {
     }
     var mousemove = function(event, d) {
         tooltip.style("transform", "translateY(-90%)")
-            .style("left", (event.x) / 2 + "px")
-            .style("top", (event.y) / 2 - 30 + "px")
+            .style("left", (event.x / 1 + 10) + "px")
+            .style("top", (event.y / 2 - 500) + "px")
     }
     var mouseleave = function(event, d) {
         tooltip
@@ -528,7 +523,7 @@ d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-55)")
         .style("font-size", "20px")
-        .style("text-anchor", "end");    
+        .style("text-anchor", "end");
 
     // Add Y axis
     var y = d3.scaleLinear()
@@ -554,15 +549,13 @@ d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        // .style("position", "absolute")
-        .style("background-color", "#fff8cc")
+        .style("background-color", "white")
         .style("border", "solid")
         .style("border-width", "2px")
         .style("border-radius", "5px")
         .style("padding", "5px")
-        .style("text-align", "center")
-        .style("max-width", "40rem")
-        .style("margin", "1rem auto 2rem auto")
+        .style("position", "relative")
+        .style("max-width", "30rem")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(event, d) {
@@ -575,8 +568,8 @@ d3.csv("./data/Earnings-Graph4.csv").then(function(data) {
     }
     var mousemove = function(event, d) {
         tooltip_earnings.style("transform", "translateY(-90%)")
-            .style("left", (event.x) / 2 + "px")
-            .style("top", (event.y) / 2 - 30 + "px")
+            .style("left", (event.x / 1 + 10) + "px")
+            .style("top", (event.y / 2 - 500) + "px")
     }
     var mouseleave = function(event, d) {
         tooltip_earnings
