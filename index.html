@@ -39,7 +39,7 @@
        display: flex;
        align-items: center;
        justify-content: center;
-       background: url('images/CANADA.jpg');
+       /* background: url('images/CANADA.jpg'); */
        background-size: cover;
        background-position: center center;
      }
@@ -141,15 +141,18 @@
 	   </nav> -->
 
         <section id="scrolly">
-            <div class="sticky-thing">
-                <p></p>
-            </div>
-
+               <div class="sticky-thing">
+               <p></p>
+               </div>
+	    <!-- 
+		 data-image=url('images/TORONTO.jpg')
+		 data-image=url('images/vancouver.jpg') -->
+	       
             <article>
-              <div class="step" data-step="">
+              <div class="step" data-step="" data-image=url('images/CANADA.jpg')>
                     <p>Do prospective migrants turn to social media to find employment opportunities prior to their arrival in Canada? If they do, are they more or less successful in their search?</p>
                 </div>
-                <div class="step" data-step="">
+                <div class="step" data-step="" data-image=url('images/TORONTO.jpg')>
                     <p>We surveyed 500 recent immigrants to Canada, asking how social media helped them learn about work prospects prior to their arrival. We then tracked their employment progress over the following year.</p>
                 </div>
                 <div class="step" data-step="">
@@ -304,7 +307,7 @@
        // update graphic based on step
        // figure out how to do transition base (see vue-scrollama)
        sticky.querySelector("p").innerText = el.dataset.step;
-       // sticky.style.backgroundImage = el.dataset.image;
+       sticky.style.backgroundImage = el.dataset.image;
        /* sticky.style.backgroundColor = el.dataset.color; */
      }
 
