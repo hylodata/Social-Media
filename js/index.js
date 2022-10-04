@@ -15,10 +15,10 @@ const margin_graph2 = {
 // append the svg object to the body of the page
 const svg_graph2 = d3.select("#Graph2")
     .append("svg")
-    .attr("width", width_graph2 + margin_graph2.left + margin_graph2.right)
-    .attr("height", height_graph2 + margin_graph2.top + margin_graph2.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin_graph2.left},${margin_graph2.top})`);
+        .attr("width", width_graph2 + margin_graph2.left + margin_graph2.right)
+        .attr("height", height_graph2 + margin_graph2.top + margin_graph2.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin_graph2.left},${margin_graph2.top})`);
 
 // parse the data
 d3.csv("./data/sm_use.csv").then(function(data) {
@@ -365,7 +365,7 @@ d3.csv("./data/bubble.csv").then(function(data) {
 })
 
 // -------------------
-// EMPLOYMENT OUTCOMES  
+// EMPLOYMENT OUTCOMES
 // -------------------
 
 // set the dimensions and margins of the graph
@@ -771,7 +771,7 @@ svg_G4donut
 //         })
 //         .style("stroke", "black")
 //         // .style("fill", function(d) { return colorScale(d.value)});
-//         // .style("fill", function(d) { return color(d.data.parent)});    
+//         // .style("fill", function(d) { return color(d.data.parent)});
 //         .style("fill", "#0077c8");
 
 //     // d3.scaleOrdinal([`#002d72`, `#0077c8`, `#5bc2f4`])
