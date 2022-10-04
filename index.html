@@ -14,7 +14,7 @@
     <style>
         #scrolly {
             position: relative;
-            background-color: #f3f3f3;
+            /* background-color: #f3f3f3; */
             padding: .01rem;
         }
 
@@ -28,10 +28,10 @@
         .sticky-thing {
             position: -webkit-sticky;
             position: sticky;
-          /* left: 0; */
+            /* left: 0; */
             width: 100%;
-          /* margin: 0; */
-            background-color: #f3f3f3;
+            /* margin: 0; */
+            /* background-color: #f3f3f3; */
             z-index: 0;
             top: 0;
             height: 100vh;
@@ -122,6 +122,37 @@
         .node:hover {
             stroke-width: 40px;
             stroke: #8a8a8a;
+        }
+
+        .svg-container {
+            display: inline-block;
+            position: relative;
+            width: 87%;
+            padding-bottom: 1%;
+            /* aspect ratio */
+            padding-left: 18%;
+            padding-right: 7%;
+            vertical-align: top;
+            overflow: hidden;
+        }
+
+        #donut {
+            max-width: 30rem;
+            margin: .1rem auto .1rem auto;
+        }
+
+        .donut-container {
+            display: inline-block;
+            scale: .6;
+            position: relative;
+            vertical-align: top;
+            overflow: hidden;
+        }
+
+        .svg-content-responsive {
+            display: inline-block;
+            position: absolute;
+            top: 1px;
         }
     </style>
 </head>
