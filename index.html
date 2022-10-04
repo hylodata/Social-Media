@@ -25,24 +25,24 @@
             margin: 0 auto;
         }
 
-     .sticky-thing {
-       position: -webkit-sticky;
-       position: sticky;
-       left: 0;
-       width: 100%;
-       margin: 0;
-       background-color: #f3f3f3;
-       z-index: 0;
-       top: 0;
-       height: 100vh;
-       /* Center everything inside */
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       background: url('images/CANADA.jpg');
-       background-size: cover;
-       background-position: center center;
-     }
+        .sticky-thing {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            background-color: #f3f3f3;
+            z-index: 0;
+            top: 0;
+            height: 100vh;
+            /* Center everything inside */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('images/CANADA.jpg');
+            background-size: cover;
+            background-position: center center;
+        }
 
         .sticky-thing p {
             font-size: 8rem;
@@ -141,15 +141,15 @@
 	   </nav> -->
 
         <section id="scrolly">
-               <div class="sticky-thing">
-               <p></p>
-               </div>
-	    <!-- 
+            <div class="sticky-thing">
+                <p></p>
+            </div>
+            <!-- 
 		 data-image=url('images/TORONTO.jpg')
 		 data-image=url('images/vancouver.jpg') -->
-	       
+
             <article>
-              <div class="step" data-step="" data-image=url('images/CANADA.jpg')>
+                <div class="step" data-step="" data-image=url('images/CANADA.jpg')>
                     <p>Do prospective migrants turn to social media to find employment opportunities prior to their arrival in Canada? If they do, are they more or less successful in their search?</p>
                 </div>
                 <div class="step" data-step="" data-image=url('images/TORONTO.jpg')>
@@ -174,7 +174,7 @@
             <h2 class="section__hed">Pre-Arrival Search and Communication</h2>
             <p class="prearrival__dek">
                 A high percentage of incoming immigrants search for information about work prospects before coming to Canada. As many as 65% (n=263) of pre-arrival newcomers surveyed are social media users, while 82% (n=288) connected with a person or group regarding immigration before coming to Canada. Facebook, for example, is almost as important as making a direct email or phone call, and more frequently used than instant messaging services. Other important social media information resources include LinkedIn, QZone, and online discussion forums.
-              <div class="visualization" id="Graph2"></div>
+            <div class="visualization" id="Graph2"></div>
             </p>
             <p class="prearrival__dek">
                 If we examine this data along gendered lines, an important difference appears. <strong style="color: #00a9ef">Men</strong> prefer email or telephone-based communication.
@@ -280,57 +280,57 @@
 	 <script src="js/index.js"></script> -->
 
     <script>
-     // move all of this into its own separate js
-     var main = document.querySelector("main");
-     var scrolly = main.querySelector("#scrolly");
-     var sticky = scrolly.querySelector(".sticky-thing");
-     var article = scrolly.querySelector("article");
-     var steps = article.querySelectorAll(".step");
-     
-     
-     // initialize the scrollama
-     var scroller = scrollama();
-     // https://stackoverflow.com/questions/54243895/scrollama-changing-charts for more than one scrollama instances
+        // move all of this into its own separate js
+        var main = document.querySelector("main");
+        var scrolly = main.querySelector("#scrolly");
+        var sticky = scrolly.querySelector(".sticky-thing");
+        var article = scrolly.querySelector("article");
+        var steps = article.querySelectorAll(".step");
 
-     // scrollama event handlers
-     function handleStepEnter(response) {
-       // response = { element, direction, index }
-       var el = response.element;
-       // remove below
-       console.log(el);
 
-       // remove is-active from all steps
-       // then add is-active to this step
-       steps.forEach(step => step.classList.remove('is-active'));
-       el.classList.add('is-active');
+        // initialize the scrollama
+        var scroller = scrollama();
+        // https://stackoverflow.com/questions/54243895/scrollama-changing-charts for more than one scrollama instances
 
-       // update graphic based on step
-       // figure out how to do transition base (see vue-scrollama)
-       sticky.querySelector("p").innerText = el.dataset.step;
-       sticky.style.backgroundImage = el.dataset.image;
-       /* sticky.style.backgroundColor = el.dataset.color; */
-     }
+        // scrollama event handlers
+        function handleStepEnter(response) {
+            // response = { element, direction, index }
+            var el = response.element;
+            // remove below
+            console.log(el);
 
-     function init() {
-       // 2. setup the scroller passing options
-       // 		this will also initialize trigger observations
-       // 3. bind scrollama event handlers (this can be chained like below)
-       // change below if there are multiple types of scrolling experiences on the page
-       scroller
-         .setup({
-           step: "#scrolly article .step",
-           offset: 0.5,
-           // turn debug back on to see where transitions are
-           debug: true
-         })
-         .onStepEnter(handleStepEnter);
+            // remove is-active from all steps
+            // then add is-active to this step
+            steps.forEach(step => step.classList.remove('is-active'));
+            el.classList.add('is-active');
 
-       // setup resize event
-       window.addEventListener("resize", scroller.resize);
-     }
+            // update graphic based on step
+            // figure out how to do transition base (see vue-scrollama)
+            sticky.querySelector("p").innerText = el.dataset.step;
+            sticky.style.backgroundImage = el.dataset.image;
+            /* sticky.style.backgroundColor = el.dataset.color; */
+        }
 
-     // kick things off
-     init();
+        function init() {
+            // 2. setup the scroller passing options
+            // 		this will also initialize trigger observations
+            // 3. bind scrollama event handlers (this can be chained like below)
+            // change below if there are multiple types of scrolling experiences on the page
+            scroller
+                .setup({
+                    step: "#scrolly article .step",
+                    offset: 0.5,
+                    // turn debug back on to see where transitions are
+                    debug: false
+                })
+                .onStepEnter(handleStepEnter);
+
+            // setup resize event
+            window.addEventListener("resize", scroller.resize);
+        }
+
+        // kick things off
+        init();
     </script>
 </body>
 
